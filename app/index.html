@@ -46,12 +46,9 @@
 	<div id="controlls">
 		<div id="behind"></div>
 		<div class="progress" style="width: {{ player.position.percentage }}vw;"><div id="postevak"></div></div>
-    <div class="play">
-			<i ng-click="player.toggle()" class="icon icon-{{ player.playing === true ? 'stop' : 'play' }}"></i>
-		</div>
-		<div class="time">
-			{{ player.position.current }}
-		</div>
+    <div class="play"><i ng-click="player.pause()" class="icon icon-{{ (player.paused === true || player.playing === true) ? 'pause' : 'play' }}"></i></div>
+		<div class="time">{{ player.position.current }}</div>
+		<i ng-click="player.stop()" class="icon icon-stop"></i>
 		<i ng-click="player.prew(player.current)" class="icon icon-left-open-big"></i>
 		<i ng-click="player.next(player.current)" class="icon icon-right-open-big"></i>
 		<i ng-click="player.random = !player.random" class="icon icon-shuffle {{ player.random === true ? 'true' : '' }}"></i>

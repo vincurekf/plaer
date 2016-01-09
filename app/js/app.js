@@ -248,6 +248,7 @@ playerApp.run(function($rootScope, $http) {
     },
     play: function(file){
       var self = this;
+          file = file || self.current;
       $rootScope.loading.active = true;
       console.log( file );
       fs.exists(file.relPath, function (exists) {
@@ -258,16 +259,9 @@ playerApp.run(function($rootScope, $http) {
         }else{
           //console.log( path.extname(file.relPath) );
           if( path.extname(file.relPath) === '.mp3' ){
-
-            console.log( path.resolve('./app/img/icon_64.png') );
-            nwNotify.setConfig({
-              appIcon: path.resolve('./app/img/icon_64.png'),
-              displayTime: 5000
-            });
-            nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album);
-
-            self.current = file;
+            // load and play audio
             self.playing = true;
+            self.current = file;
             self.audio = new Howl({
               src: ['../'+file.relPath],
               volume: $rootScope.player.volume.value/100,
@@ -283,6 +277,12 @@ playerApp.run(function($rootScope, $http) {
               }
             });
             self.audio.play();
+            // show notification
+            nwNotify.setConfig({
+              appIcon: path.resolve('./app/img/icon_64.png'),
+              displayTime: 5000
+            });
+            nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album);
           }else{
             self.next(file);
           }
@@ -293,10 +293,12 @@ playerApp.run(function($rootScope, $http) {
       var lastTrack = this.current;
       $rootScope.player.stop();
       var id = _.findIndex( $rootScope.archive.files, lastTrack);
-      if( id === $rootScope.archive.size ){
-        console.log( 'kobec listu - opakovat' );
-        var newFile = $rootScope.archive.files[0];
-        this.play( newFile );
+      if( id === $rootScope.archive.size-1 ){
+        console.log( 'List ended' );
+        if(this.loop){
+          var newFile = $rootScope.archive.files[0];
+          this.play( newFile );
+        }
       }else{
         var random = this.getRandom($rootScope.archive.size, 0);
         var newId = this.random ? random : id+1;
@@ -306,12 +308,12 @@ playerApp.run(function($rootScope, $http) {
       $rootScope.$apply();
     },
     next: function(current){
-      var id = _.findIndex( $rootScope.archive.files, current);
-      var random = this.getRandom($rootScope.archive.size, 0);
-      var newId = this.random ? random : id+1;
       if( this.playing ){
         this.stop();
       }
+      var id = _.findIndex( $rootScope.archive.files, current);
+      var random = this.getRandom($rootScope.archive.size, 0);
+      var newId = this.random ? random : id+1;
       var newFile = $rootScope.archive.files[newId];
       if( newFile ){
         this.play(newFile);
@@ -331,9 +333,34 @@ playerApp.run(function($rootScope, $http) {
       this.audio.stop();
       this.audio = null;
       this.playing = false;
+      this.paused = false;
       this.position.stopWatch();
       this.position.current = '00:00';
       this.position.percentage = 0;
+    },
+    pause: function(){
+      var self = this;
+          file = self.current || null;
+      if(this.paused){
+        this.audio.play();
+        this.paused = false;
+      }else{
+        if(this.playing){
+          this.audio.pause();
+          this.paused = true;
+        }else{
+          if( file ){
+            this.play( file );
+          }else{
+            var random = this.getRandom($rootScope.archive.size, 0);
+            var randFile = $rootScope.archive.files[random];
+            this.play( randFile );
+          }
+        }
+      }/*
+      this.playing = true;
+      newFile = file || this.current;
+      */
     },
     toggle: function(file){
       var self = this;
@@ -369,6 +396,7 @@ playerApp.run(function($rootScope, $http) {
     position: {
       timer: null,
       current: '00:00',
+      currentSeek: null,
       percentage: 0,
       watch: function(){
         var self = $rootScope.player;
@@ -430,6 +458,7 @@ playerApp.run(function($rootScope, $http) {
         var seekVal = Math.floor(($rootScope.player.duration/100)*perc);
         console.log( seekVal );
         if( $rootScope.player.audio ) $rootScope.player.audio.seek( seekVal );
+        $rootScope.player.audio
       },
     },
     volume: {

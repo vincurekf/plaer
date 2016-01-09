@@ -24,9 +24,8 @@ body{
 	vertical-align: middle;
 	width: $control-icon-width;
 	height: $control-panel-height;
-	font-size: $control-panel-height*0.6;
 	text-align: center;
-	color: rgba($main-accent-color+#888,0.1);
+	color: rgba($main-accent-color+#888,0.15);
 	padding: 0;
 	transition: all 0.3s ease;
 	margin: 0 0.2rem 0 0;
@@ -42,39 +41,6 @@ body{
 	&:hover{
 		text-shadow: 0 1px 14px rgba($main-accent-color+#888,0.85);
 		color: $main-font-color;
-	}
-	&.icon-right-open-big, &.icon-left-open-big, &.icon-shuffle, &.icon-loop{
-		position: absolute;
-		top: 0;
-	}
-	&.icon-play, &.icon-stop{
-		left: $control-icon-width*1;
-		&:hover{
-			background: transparent;
-		}
-	}
-	&.icon-shuffle, &.icon-loop{
-		left: $control-icon-width*3;
-		width: $control-icon-width*0.5;
-		&::before{
-			font-size: $control-panel-height*0.3;
-			line-height: $control-panel-height;
-		}
-		&.true{
-			color: $main-accent-color;
-			&:hover{
-				color: $main-font-color;
-			}
-		}
-	}
-	&.icon-loop{
-		left: $control-icon-width*3.5;
-	}
-	&.icon-left-open-big{
-		left: 0;
-	}
-	&.icon-right-open-big{
-		left: $control-icon-width*2;
 	}
 	&.ion-refresh {
 	  position: absolute;
@@ -175,18 +141,70 @@ body{
 	height: $control-panel-height;
 	background: $main-bg-color;
 	line-height: $control-panel-height;
+	.icon{
+		position: absolute;
+		top: 0;
+		left: 0;
+		&.icon-play, &.icon-pause, &.icon-stop{
+			left: $control-icon-width;
+			&:hover{
+				background: transparent;
+			}
+		}
+		&.icon-pause{
+			color: rgba($main-accent-color+#333,0.85);
+			text-shadow: 0 1px 14px rgba($main-accent-color+#333,0.45);
+			&:hover{
+				text-shadow: 0 1px 14px rgba($main-accent-color+#333,0.85);
+				color: $main-font-color;
+			}
+		}
+		&.icon-stop{
+			left: $control-icon-width*2;
+		}
+		&.icon-right-open-big{
+			left: $control-icon-width*2;
+		}
+		&.icon-left-open-big{
+			left: 0;
+		}
+		&.icon-right-open-big{
+			transform: translate(200%,0);
+		}
+		&.icon-shuffle, &.icon-loop{
+			left: $control-icon-width*3.3;
+			width: $control-icon-width*0.5;
+			height: $control-panel-height*0.3;
+			&::before{
+				font-size: $control-panel-height*0.3;
+				line-height: $control-panel-height*0.3;
+			}
+			&.true{
+				color: $main-accent-color;
+				&:hover{
+					color: $main-font-color;
+				}
+			}
+			&.icon-loop{
+				top: $control-panel-height*0.5;
+			}
+			&.icon-shuffle{
+				top: auto;
+				bottom: $control-panel-height*0.5;
+			}
+		}
+	}
 	//overflow: hidden;
 	#behind{
 		pointer-events: all;
 		background: rgba($main-bg-color, 0.1);
 		position: absolute;
-	  top: 0;
+	  top: 0.2;
 	  left: 0;
-	  height: 0.6rem;
+	  height: 0.4rem;
 		width: 100vw;
 	  display: block;
 	  z-index: 9;
-	  box-shadow: 0 1px 3px rgba(0,0,0,0.6);
 		cursor: pointer;
 		&:hover{
 			background: rgba($main-bg-color, 0.5);
@@ -227,24 +245,24 @@ body{
 		width: 5rem;
 		position: absolute;
 		top: 0;
-		left: $control-icon-width*5;
+		left: $control-icon-width*5.3;
 	}
 	.info{
 		position: absolute;
 		top: 0;
-		left: $control-icon-width*6;
+		left: $control-icon-width*7.1;
 		overflow: hidden;
 	}
 	.play{
+		position: absolute;
 		width: $control-icon-width;
 		height: $control-panel-height;
 		display: inline-block;
-		position: relative;
 		&::before{
 			content: ' ';
-			width: $control-panel-height*4.5;
-			height: $control-panel-height*4.5;
-			background: rgba($main-accent-color+#888,0.05);
+			width: $control-panel-height*7;
+			height: $control-panel-height*7;
+			background: rgba($main-accent-color+#666,0.025);
 			position: absolute;
 			top: 50%;
 			left: 50%;
@@ -464,7 +482,7 @@ body{
 /***************************************
  * SLIDER
  **************************************/
-$track-color: $main-accent-color - #777;
+$track-color: rgba($main-accent-color, 0.2);
 $thumb-color: $main-accent-color;
 //
 $thumb-radius: 0.6rem;
@@ -519,12 +537,12 @@ input[type=range] {
 		margin-top: 0;
   }
   &:focus::-webkit-slider-runnable-track {
-		background: $track-color + #111;
+		background: $track-color;
   }
   &:focus::-ms-fill-lower {
 		background: $track-color;
   }
   &:focus::-ms-fill-upper {
-		background: $track-color + #111;
+		background: $track-color;
   }
 }
