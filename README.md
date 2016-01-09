@@ -1,6 +1,6 @@
 # PLAER
 PLAER is a simple mp3 player that scan directory it is placed in to (**/some/dir/plaer** will scan **/some/dir**) and lets you browse and play founded mp3 files.
-
+![Native-like Framework](screenshot.png)
 Nothing more and nothing less.
 
 Build on nw.js, so it is just Java Script and HTML + CSS.
