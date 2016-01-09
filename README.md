@@ -6,7 +6,7 @@ PLAER is a simple mp3 player that scan directory it is placed in to (**/some/dir
 Basic features that should have every audio player.
 - Play/Stop buddon
 - Seek through playing audio
-- View Artists thier Albums and songs
+- View Artists, their Albums and songs
 
 Nothing more and nothing less.
 
