@@ -1,0 +1,310 @@
+@import 'normalize.css';
+
+/*! BRICKst v1.0.0 | MIT License | allienworks.net */
+
+
+// ------ GENERAL & CONFIG ------ //
+
+// Colors
+$primary: #4374b7; // main color (blue by default)
+$secondary: #DCDDDE; // usually grayscale-ish, slightly darked than content background
+$success: #98C807; // greens
+$alert: #D13814; // reds
+$warning: #EF9421; // oranges :)
+$black: #202020;
+$white: #fff;
+
+// Breakpoints
+$break-hd: 80.5rem;
+$break-large: 64.063rem;
+$break-medium: 40.063rem;
+
+// Grid
+$rowWidth: 64rem;
+$gutterWidth: 1.5rem;
+
+// UI
+$borderRadius: 4px;
+
+// Typography
+$font: "Open Sans", "Helvetica", "Arial", sans-serif;
+$line-height: 1.5rem;
+
+
+* { box-sizing: border-box; }
+html { font-size: 16px; line-height: $line-height; }
+body { font-family: $font; cursor: default; }
+a {
+	text-decoration: none; color: $primary;
+	&:hover { color: darken($primary, 10%); }
+	&:focus { outline: none; }
+}
+
+h1, h2, h3, h4, h5 {
+	font-feature-settings: "dlig", "liga", "kern"; // for beautiful typography & ligatures
+}
+
+
+// ------ MIXINS ------ //
+
+// Responsive mixin (Foundation-like medium/large + custom-made "hd" breakpoint)
+@mixin respond-to($media) {
+  @if $media == medium {
+  	// @include respond-to(medium) {  }
+    @media only screen and (min-width: $break-medium) { @content; }
+  }
+  @else if $media == large {
+  	// @include respond-to(large) {  }
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+  @else if $media == hd {
+  	// @include respond-to(hd) {  }
+    @media only screen and (min-width: $break-hd) { @content; }
+  }
+}
+
+// Custom responsivity (px-based, for when default breakpoints aren't enough)
+@mixin respond-from($size) {
+  // Usage: @include respond-from(741px) {  }
+  @media only screen and (min-width: $size) { @content; }
+}
+
+// Orientation mixin for landscape/portrait
+@mixin orientation($orientation) {
+  // @include orientation(landscape) { ... }
+  // @include orientation(portrait) { ... }
+  @media only screen and (orientation: $orientation) { @content; }
+}
+
+
+// @include gradient (<top-color>, <bottom-color>);
+@mixin gradient($top, $bottom) {
+	background: $top;
+	background: -moz-linear-gradient(top, $top 0%, $bottom 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom));
+	background: -webkit-linear-gradient(top, $top 0%,$bottom 100%);
+	background: -o-linear-gradient(top, $top 0%,$bottom 100%);
+	background: -ms-linear-gradient(top, $top 0%,$bottom 100%);
+	background: linear-gradient(to bottom, $top 0%,$bottom 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$top', endColorstr='$bottom',GradientType=0 );
+}
+
+
+
+// ------ GRID ------ //
+
+.row { // shamelessly inspired by Foundation
+	width: 100%; max-width: $rowWidth; margin: 0 auto;
+	&:after { clear: both; content: " "; display: table; }
+	&.expand { max-width: 100%; }
+	&.collapse .column,
+	&.collapse .columns { padding: 0; }
+	&.narrow .column,
+	&.narrow .columns { padding: 0 ($gutterWidth / 2); }
+}
+.column,
+.columns {
+	float: left;
+	width: 100%; padding: 0 $gutterWidth;
+	position: relative;
+	&.end { float: right; }
+}
+
+// Small Grid
+.small-11 { width: (100%/12*11); }
+.small-10 { width: (100%/12*10); }
+.small-9 { width: (100%/12*9); }
+.small-8 { width: (100%/12*8); }
+.small-7 { width: (100%/12*7); }
+.small-6 { width: (100%/12*6); }
+.small-5 { width: (100%/12*5); }
+.small-4 { width: (100%/12*4); }
+.small-3 { width: (100%/12*3); }
+.small-2 { width: (100%/12*2); }
+.small-1 { width: (100%/12*1); }
+
+.small-centered { float: none; margin: 0 auto; }
+.small-uncentered { float: left; margin: 0; }
+
+
+// Medium Grid
+@include respond-to(medium) {
+	.large-1, .large-2, .large-3, .large-4, .large-5, .large-6, .large-7, .large-8, .large-9, .large-10, .large-11, .large-12 { width: 100%; }
+	.medium-11 { width: (100%/12*11); }
+	.medium-10 { width: (100%/12*10); }
+	.medium-9 { width: (100%/12*9); }
+	.medium-8 { width: (100%/12*8); }
+	.medium-7 { width: (100%/12*7); }
+	.medium-6 { width: (100%/12*6); }
+	.medium-5 { width: (100%/12*5); }
+	.medium-4 { width: (100%/12*4); }
+	.medium-3 { width: (100%/12*3); }
+	.medium-2 { width: (100%/12*2); }
+	.medium-1 { width: (100%/12*1); }
+
+	.medium-centered { float: none; margin: 0 auto; }
+	.medium-uncentered { float: left; margin: 0; }
+}
+
+
+// Large Grid
+@include respond-to(large) {
+	.large-11 { width: (100%/12*11); }
+	.large-10 { width: (100%/12*10); }
+	.large-9 { width: (100%/12*9); }
+	.large-8 { width: (100%/12*8); }
+	.large-7 { width: (100%/12*7); }
+	.large-6 { width: (100%/12*6); }
+	.large-5 { width: (100%/12*5); }
+	.large-4 { width: (100%/12*4); }
+	.large-3 { width: (100%/12*3); }
+	.large-2 { width: (100%/12*2); }
+	.large-1 { width: (100%/12*1); }
+
+	.large-centered { float: none; margin: 0 auto; }
+	.large-uncentered { float: left; margin: 0; }
+}
+
+
+
+
+
+
+// ------ FORMS ------ //
+
+input,
+textarea,
+select {
+	width: 100%; margin-bottom: 0.7rem;
+	&[type="checkbox"],
+	&[type="radio"] { width: auto; }
+}
+label { cursor: pointer; }
+
+
+
+
+// ------ MEDIA ------ //
+
+img { max-width: 100%; height: auto; -ms-interpolation-mode: bicubic; }
+iframe { display: block; max-width: 100%; }
+
+
+
+
+
+// ------ HELPER CLASSES ------ //
+
+// Visibility
+.hide { display: none; }
+.hide-for-small {
+	display: none !important;
+	@include respond-to(medium) { display: inherit !important; }
+}
+.hide-for-medium {
+	@include respond-to(medium) { display: none !important; }
+	@include respond-to(large) { display: inherit !important; }
+}
+.hide-for-large {
+	@include respond-to(large) { display: none !important; }
+}
+.show-for-small {
+	@include respond-to(medium) { display: none !important; }
+}
+.show-for-medium {
+	display: none !important;
+	@include respond-to(medium) { display: inherit !important; }
+	@include respond-to(large) { display: none; }
+}
+.show-for-large {
+	display: none;
+	@include respond-to(large) { display: inherit !important; }
+}
+
+
+// Text align
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-center { text-align: center; }
+
+// Effects
+.tfx, a { -webkit-transition: all 0.3s; transition: all 0.3s; }
+.zoom { -webkit-transform: scale(1.1); transform: scale(1.1); }
+
+// Clearfix
+.clearfix {
+	&::before, &::after { content: ""; display: table; }
+	&::after { clear: both; }
+}
+
+
+.show-grid { // inspired by https://sassline.com
+	background-image: linear-gradient(to bottom, #0ff 0px, rgba(255, 255, 255, 0) 1px);
+  background-repeat: repeat-y;
+  background-size: 100% 1rem;
+}
+
+
+// ------ UI ELEMENTS ------ //
+
+.button, button {
+	font-weight: bold; text-decoration: none; color: $white;
+	display: inline-block; padding: 0.7rem 1.2rem;
+	background: $primary; border-radius: $borderRadius; border: none;
+	@extend .tfx;
+	&:hover { background: darken($primary, 7%); color: $white; }
+	&.toggled { background: darken($primary, 10%); box-shadow: 0 3px darken($primary, 24%) inset; }
+
+	// Button Sizes
+	&.tiny { padding: 0.3rem 0.7rem; font-size: 0.65rem; }
+	&.small { padding: 0.5rem 0.95rem; font-size: 0.825rem; }
+	&.large { padding: 0.9rem 1.45rem; font-size: 1.125rem; }
+	&.expand { width: 100%; }
+
+	// Button Variants/Mods
+	&.secondary {
+		color: $black;
+		background: $secondary;
+		&:hover { background: darken($secondary, 7%); }
+		&.toggled { background: darken($secondary, 10%); box-shadow: 0 3px darken($secondary, 24%) inset; }
+	}
+	&.success {
+		background: $success;
+		&:hover { background: darken($success, 7%); }
+		&.toggled { background: darken($success, 10%); box-shadow: 0 3px darken($success, 24%) inset; }
+	}
+	&.alert {
+		background: $alert;
+		&:hover { background: darken($alert, 7%); }
+		&.toggled { background: darken($alert, 10%); box-shadow: 0 3px darken($alert, 24%) inset; }
+	}
+	&.warning {
+		background: $warning;
+		&:hover { background: darken($warning, 7%); }
+		&.toggled { background: darken($warning, 10%); box-shadow: 0 3px darken($warning, 24%) inset; }
+	}
+}
+
+.panel {
+	background: $secondary;
+	padding: 0.1rem 1.4rem; margin: 1rem 0;
+}
+
+
+// ------ DEFAULT HTML STYLING ------ //
+
+.table { max-width: 100%; overflow-x: auto; }
+table {
+	tr {
+		border-bottom: 1px solid #ddd;
+		th { text-align: left; }
+	}
+
+	&.expand { width: 100%; }
+}
+
+hr { margin: 2rem 0; border: 0; border-top: 1px solid $secondary; }
+
+code, kbd, pre, samp {
+	background: lighten($secondary, 5%);
+}

@@ -1,0 +1,44 @@
+<div id="main-view">
+
+    <div class="tri-view left">
+      <h3>Artists</h3>
+      <ul class="list">
+        <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.artist.get('')">
+          ALL
+        </li>
+        <li ng-repeat="artist in archive.artists | filter:searching" class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.artist.get(artist)">
+          {{ artist !== '' ? artist : 'unknown' }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="tri-view middle">
+      <h3>Albums</h3>
+      <ul class="list">
+        <li ng-repeat="album in list.current.albums" class="song {{ player.currAlbum(album) === true ? 'playing' : '' }}" ng-click="list.set.album(album)">
+          {{ album }}
+        </li>
+      </ul>
+    </div>
+
+    <div class="tri-view right">
+      <h3>Songs</h3>
+      <div class="album">
+        <img class="art" ng-if="list.albumArt" src="{{ list.albumArt }}">
+        <div class="info {{ list.albumArt !== false ? 'with-art' : '' }}">
+          <strong>
+            <i class="icon icon-user-1"></i>{{ list.albumInfo.artist }}<br>
+            <i class="icon icon-coverflow"></i>{{ list.albumInfo.album }}<br>
+          </strong>
+          <span ng-if="list.albumInfo.v2.genre"><i class="icon icon-note"></i>{{ list.albumInfo.v2.genre }}<br></span>
+          <span ng-if="list.albumInfo.size"><i class="icon icon-th-list"></i>{{ list.albumInfo.size }}<br></span>
+        </div>
+      </div>
+      <ul class="list {{ list.albumArt !== false ? 'with-art' : '' }}">
+        <li ng-repeat="song in list.current.songs" class="song {{ player.songState(song) === true ? 'playing' : '' }}" ng-click="player.toggle(song)">
+          <i class="icon icon-{{ player.songState(song) === true ? 'stop' : 'play' }}"></i> {{ song.title !== '' ? song.title : song.name }}
+        </li>
+      </ul>
+    </div>
+
+</div>

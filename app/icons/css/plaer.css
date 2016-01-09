@@ -1,0 +1,99 @@
+@font-face {
+  font-family: 'plaer';
+  src: url('../font/plaer.eot?57911049');
+  src: url('../font/plaer.eot?57911049#iefix') format('embedded-opentype'),
+       url('../font/plaer.woff?57911049') format('woff'),
+       url('../font/plaer.ttf?57911049') format('truetype'),
+       url('../font/plaer.svg?57911049#plaer') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
+/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
+/*
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'plaer';
+    src: url('../font/plaer.svg?57911049#plaer') format('svg');
+  }
+}
+*/
+ 
+ [class^="icon-"]:before, [class*=" icon-"]:before {
+  font-family: "plaer";
+  font-style: normal;
+  font-weight: normal;
+  speak: none;
+ 
+  display: inline-block;
+  text-decoration: inherit;
+  width: 1em;
+  margin-right: .2em;
+  text-align: center;
+  /* opacity: .8; */
+ 
+  /* For safety - reset parent styles, that can break glyph codes*/
+  font-variant: normal;
+  text-transform: none;
+ 
+  /* fix buttons height, for twitter bootstrap */
+  line-height: 1em;
+ 
+  /* Animation center compensation - margins should be symmetric */
+  /* remove if not needed */
+  margin-left: .2em;
+ 
+  /* you can be more comfortable with increased icons size */
+  /* font-size: 120%; */
+ 
+  /* Font smoothing. That was taken from TWBS */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+ 
+  /* Uncomment for 3D effect */
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
+}
+ 
+.icon-emo-angry:before { content: '\e800'; } /* '' */
+.icon-emo-cry:before { content: '\e801'; } /* '' */
+.icon-emo-laugh:before { content: '\e802'; } /* '' */
+.icon-emo-displeased:before { content: '\e803'; } /* '' */
+.icon-emo-grin:before { content: '\e804'; } /* '' */
+.icon-emo-unhappy:before { content: '\e805'; } /* '' */
+.icon-emo-sleep:before { content: '\e806'; } /* '' */
+.icon-emo-happy:before { content: '\e807'; } /* '' */
+.icon-emo-coffee:before { content: '\e808'; } /* '' */
+.icon-emo-sunglasses:before { content: '\e809'; } /* '' */
+.icon-emo-beer:before { content: '\e80a'; } /* '' */
+.icon-emo-squint:before { content: '\e80b'; } /* '' */
+.icon-emo-saint:before { content: '\e80c'; } /* '' */
+.icon-emo-shoot:before { content: '\e80d'; } /* '' */
+.icon-emo-surprised:before { content: '\e80e'; } /* '' */
+.icon-emo-tongue:before { content: '\e80f'; } /* '' */
+.icon-emo-devil:before { content: '\e810'; } /* '' */
+.icon-emo-thumbsup:before { content: '\e811'; } /* '' */
+.icon-emo-wink:before { content: '\e812'; } /* '' */
+.icon-emo-wink2:before { content: '\e813'; } /* '' */
+.icon-spin3:before { content: '\e814'; } /* '' */
+.icon-play:before { content: '\e815'; } /* '' */
+.icon-stop:before { content: '\e816'; } /* '' */
+.icon-ok:before { content: '\e817'; } /* '' */
+.icon-heart-broken:before { content: '\e818'; } /* '' */
+.icon-help:before { content: '\e819'; } /* '' */
+.icon-cog:before { content: '\e81a'; } /* '' */
+.icon-user:before { content: '\e81b'; } /* '' */
+.icon-cw:before { content: '\e81c'; } /* '' */
+.icon-th-list:before { content: '\e81d'; } /* '' */
+.icon-left-open-big:before { content: '\e81e'; } /* '' */
+.icon-pause:before { content: '\e81f'; } /* '' */
+.icon-user-1:before { content: '\e820'; } /* '' */
+.icon-plus:before { content: '\e821'; } /* '' */
+.icon-cancel:before { content: '\e822'; } /* '' */
+.icon-attention:before { content: '\e823'; } /* '' */
+.icon-right-open-big:before { content: '\e824'; } /* '' */
+.icon-down-dir:before { content: '\e825'; } /* '' */
+.icon-coverflow:before { content: '\e826'; } /* '' */
+.icon-user-female:before { content: '\e827'; } /* '' */
+.icon-shuffle:before { content: '\e828'; } /* '' */
+.icon-loop:before { content: '\e829'; } /* '' */
+.icon-note:before { content: '\e82a'; } /* '' */

@@ -1,0 +1,45 @@
+{
+  "name": "PLAER",
+  "single-instance": false,
+  "nodejs": true,
+  "description": "",
+  "keywords": [],
+  "inject-js-start": "",
+  "node-remote": "",
+  "main": "./app/index.html",
+  "chromium-args": "",
+  "window": {
+    "title": "PLAER",
+    "icon": "./app/img/icon_32.png",
+    "toolbar": false,
+    "position": "center",
+    "resizable": true,
+    "always-on-top": false,
+    "width": 500,
+    "height": 500,
+    "min-width": 300,
+    "min-height": 400,
+    "frame": false,
+    "show": false,
+    "visible": true,
+    "fullscreen": false,
+    "transparent": false,
+    "show_in_taskbar": true
+  },
+  "version": "0.1.0",
+  "snapshot": "",
+  "node-main": "",
+  "webkit": {
+    "page-cache": false,
+    "java": false,
+    "plugin": false
+  },
+  "dependencies": {
+    "underscore": "",
+    "fs-extra": "^0.26.4",
+    "id3js": "",
+    "getdirs": "",
+    "request": "",
+    "nw-notify": ""
+  }
+}
