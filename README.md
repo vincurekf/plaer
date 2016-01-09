@@ -10,7 +10,7 @@ Basic features that should have every audio player.
 
 Nothing more and nothing less.
 
-Build on nw.js, so it is just Java Script and HTML + CSS.
+Build on nw.js (on **v0.12.3**, linux 64bit tested and working), so it is just Java Script and HTML + CSS.
 
 ## Installation
 Installation is not done yet, and for now, you need to:
