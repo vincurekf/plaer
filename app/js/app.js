@@ -599,10 +599,18 @@ playerApp.run(function($rootScope, $http) {
     },
     volume: {
       value: 50,
+      up: function(){
+        var value = this.value < 90 ? this.value + 10 : 100;
+        this.set(value);
+      },
+      down: function(){
+        var value = this.value > 10 ? this.value - 10 : 0;
+        this.set(value);
+      },
       set: function(value){
         $rootScope.player.volume.value = value;
         if($rootScope.player.playing){
-          $rootScope.player.audio.set("volume", $rootScope.player.volume.value/100);
+          $rootScope.player.audio.set("volume", ($rootScope.player.volume.value/100).toFixed(1));
         }
       }
     },
@@ -619,12 +627,20 @@ playerApp.run(function($rootScope, $http) {
     },
     bindKeys: function(){
       var self = this;
-      Mousetrap.bind(['command+left', 'ctrl+left'], function(e) {
+      Mousetrap.bind(['left', 'left'], function(e) {
         self.prew(self.current);
         return false
       });
-      Mousetrap.bind(['command+right', 'ctrl+right'], function(e) {
+      Mousetrap.bind(['right', 'right'], function(e) {
         self.next(self.current);
+        return false
+      });
+      Mousetrap.bind(['up', 'up'], function(e) {
+        self.volume.up();
+        return false
+      });
+      Mousetrap.bind(['down', 'down'], function(e) {
+        self.volume.down();
         return false
       });
       Mousetrap.bind(['space'], function(e) {
@@ -638,6 +654,10 @@ playerApp.run(function($rootScope, $http) {
       });
       Mousetrap.bind(['command+f', 'ctrl+f'], function(e) {
         self.find();
+        return false
+      });
+      Mousetrap.bind(['command+r', 'ctrl+r'], function(e) {
+        self.random = !self.random;
         return false
       });
     }

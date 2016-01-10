@@ -10,6 +10,15 @@ Basic features that should have every audio player.
 - view artists, their albums and songs
 - automatically try to fetch and save album art via [iTunes search API](http://www.apple.com/itunes/affiliates/resources/documentation/itunes-store-web-service-search-api.html)
 - notification of currently playing song
+- keyboard shortcuts
+  - space: play/pause
+  - shift+space: stop
+  - right: next
+  - left: previous
+  - up: volume up
+  - down: volume down
+  - ctrl+f: search
+  - ctrl+r: random on/off
 
 Nothing more and nothing less.
 
