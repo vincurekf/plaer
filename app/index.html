@@ -24,6 +24,15 @@
 			<div class="rect3"></div>
 			<div class="rect4"></div>
 			<div class="rect5"></div>
+			<div class="rect6"></div>
+			<div class="rect7"></div>
+			<div class="rect6"></div>
+			<div class="rect5"></div>
+			<div class="rect4"></div>
+			<div class="rect3"></div>
+			<div class="rect2"></div>
+			<div class="rect1"></div>
+			<span class="message">{{ loading.message }}</span>
 		</div>
 	</div>
 	<div class="search">
@@ -38,6 +47,14 @@
 		<i class='icon ion-refresh' ng-click="archive.scan();">rescan library</i>
 		<span id="close-window-button" class="close-button"><i class="icon ion-ios-close-empty"></i></span>
 		<span id="minimize-window-button" class="minimize-button"><i class="icon ion-ios-minus-empty"></i></span>
+	</div>
+
+	<div id="sidepanel" class="left">
+		<i class="icon icon-folder-empty"></i>
+		<h3>Source</h3>
+		Current: <span class="source">{{ archive.folder }}</span><br>
+		Set new: <input ng-model="archive.newFolder" placeholder="New scan path">
+		<button ng-click="archive.setPath()" class="set-path">Scan path</button>
 	</div>
 
 	<div id="page-holder" ng-view="">

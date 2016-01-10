@@ -84,12 +84,12 @@ var viewbox = {
       viewbox.get( setTray );
     }
     window.onfocus = function() {
-      console.log("focus");
+      //console.log("focus");
       viewbox.focus(true);
     }
     window.onblur = function() {
       console.log("blur");
-      viewbox.focus(false);
+      //viewbox.focus(false);
     }
   },
   get: function( setTray ){

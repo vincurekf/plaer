@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'plaer';
-  src: url('../font/plaer.eot?57911049');
-  src: url('../font/plaer.eot?57911049#iefix') format('embedded-opentype'),
-       url('../font/plaer.woff?57911049') format('woff'),
-       url('../font/plaer.ttf?57911049') format('truetype'),
-       url('../font/plaer.svg?57911049#plaer') format('svg');
+  src: url('../font/plaer.eot?14238190');
+  src: url('../font/plaer.eot?14238190#iefix') format('embedded-opentype'),
+       url('../font/plaer.woff?14238190') format('woff'),
+       url('../font/plaer.ttf?14238190') format('truetype'),
+       url('../font/plaer.svg?14238190#plaer') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'plaer';
-    src: url('../font/plaer.svg?57911049#plaer') format('svg');
+    src: url('../font/plaer.svg?14238190#plaer') format('svg');
   }
 }
 */
@@ -97,3 +97,4 @@
 .icon-shuffle:before { content: '\e828'; } /* '' */
 .icon-loop:before { content: '\e829'; } /* '' */
 .icon-note:before { content: '\e82a'; } /* '' */
+.icon-folder-empty:before { content: '\e82b'; } /* '' */
