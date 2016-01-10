@@ -43,9 +43,11 @@ body{
 		color: $main-font-color;
 	}
 	&.ion-refresh {
+		z-index: 11;
+		-webkit-app-region: no-drag;
 	  position: absolute;
 		top: 0;
-		right: 8rem;
+		right: 6.5rem;
 	}
 }
 
@@ -67,8 +69,8 @@ body{
 		font-size: $title-height*0.6;
 		line-height: $title-height;
 		text-align: center;
-		-webkit-app-region: no-drag;
 		&::before{
+			-webkit-app-region: no-drag;
 			color: rgba($main-font-color, 0.8);
 			padding: 0;
 			margin: 0;
@@ -462,28 +464,32 @@ $sidepanel-width: 250px;
   background: transparent;
   left: 7.5rem;
 	display: inline-block;
-	width: 50vw;
 	z-index: 10;
+	width: 10rem + $title-height;
 	i{
+		-webkit-app-region: no-drag;
 		height: $title-height;
 		line-height: $title-height;
 		&::before{
+			-webkit-app-region: no-drag;
 			height: $title-height;
 			line-height: $title-height;
 		}
 	}
 	label{
+		-webkit-app-region: no-drag;
 		margin: 0;
 		padding: 0;
 	}
 	input{
+		-webkit-app-region: no-drag;
   	background: rgba($main-font-color, 0.05);
 		height: $title-height;
 		line-height: $title-height;
 		color: $main-font-color;
 		display: inline-block;
 		position: absolute;
-		width: 20vw;
+		width: 10rem;
 		border: none;
 	}
 }

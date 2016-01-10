@@ -16,10 +16,7 @@ Nothing more and nothing less.
 Build on nw.js (on v0.12.3, linux 64bit tested and working), so it is just Java Script and HTML + CSS.
 
 ## Installation
-Just go ahead amd download executable file for your operating system from [here]()
-
-## Edit and build
-For editing and building your own Plaer you need to have nodejs and npm installed. How to install nodejs (and npm) see [nodejs.org](https://nodejs.org/en/).
+To use Plaer you need to have nodejs and npm installed. How to install nodejs (and npm) see [nodejs.org](https://nodejs.org/en/).
 
 When you have nodejs (and npm) installed and working:
 
@@ -30,7 +27,7 @@ When you have nodejs (and npm) installed and working:
 - Run nw (or nw.exe on windows)
 - Enjoy!
 
-[Web2Executable](https://github.com/jyapayne/Web2Executable) - Excellent tool for building executable files
+[Web2Executable](https://github.com/jyapayne/Web2Executable) - Excellent tool for building executable files (only problem is that now compressed version of Plaer can't access audio files - the folder will be scanned, but audio wont load :/ )
 
 ## Known flaws
 When loading large files (~200mb) the app may become unresponsive or laggy.

@@ -163,8 +163,8 @@ playerApp.run(function($rootScope, $http) {
           }).on('end', function () {
             // save path to storage
             localforage.setItem('scan_folder', foldPath, function(err, value) {
+              console.log( value );
               if(err) console.log( err );
-              self.folder = value;
               console.log( value );
             });
             // remove duplicates
@@ -291,10 +291,11 @@ playerApp.run(function($rootScope, $http) {
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
       console.log( file );
-      fs.exists(file.relPath, function (exists) {
-        //console.log(exists);
+      fs.exists(file.path, function (exists) {
+        console.log(exists);
         if( !exists ){
           alert('file does not exist');
+          $rootScope.loading.active = true;
           return false
         }else{
           //console.log( path.extname(file.relPath) );
@@ -302,19 +303,17 @@ playerApp.run(function($rootScope, $http) {
             // load and play audio
             self.playing = true;
             self.current = file;
-            self.audio = new Howl({
-              src: ['../'+file.relPath],
-              volume: $rootScope.player.volume.value/100,
-              onend: function(){
-                $rootScope.player.onend();
-              },
-              onplay: function(){
-                $rootScope.player.position.watch();
-                $rootScope.loading.active = false;
-                $rootScope.player.duration = Math.floor(self.audio.duration());
-                console.log(self.duration);
-                //$rootScope.$apply();
-              }
+            self.audio =  new buzz.sound('../'+file.relPath);
+            self.audio.bind("playing", function(e) {
+              $rootScope.player.position.watch();
+              self.audio.set("volume", self.volume.value/100 );
+              $rootScope.loading.active = false;
+              $rootScope.player.duration = Math.floor(self.audio.getDuration());
+              console.log(self.duration);
+              $rootScope.$apply();
+            });
+            self.audio.bind("ended", function(e) {
+              $rootScope.player.onend();;
             });
             self.audio.play();
             // show notification
@@ -441,8 +440,8 @@ playerApp.run(function($rootScope, $http) {
       watch: function(){
         var self = $rootScope.player;
         self.position.timer = setInterval( function(){
-          self.position.current = self.position.format( Math.floor(self.audio.seek()) ) || '00:00';
-          self.position.percentage = (100/$rootScope.player.duration) * self.audio.seek();
+          self.position.current = self.position.format( Math.floor(self.audio.getTime()) ) || '00:00';
+          self.position.percentage = (100/$rootScope.player.duration) * self.audio.getTime();
           $rootScope.$apply();
         }, 100);
       },
@@ -497,7 +496,7 @@ playerApp.run(function($rootScope, $http) {
         var perc = (100/winWidth) * pxpos;
         var seekVal = Math.floor(($rootScope.player.duration/100)*perc);
         console.log( seekVal );
-        if( $rootScope.player.audio ) $rootScope.player.audio.seek( seekVal );
+        if( $rootScope.player.audio ) $rootScope.player.audio.setTime( seekVal );
         $rootScope.player.audio
       },
     },
@@ -506,7 +505,7 @@ playerApp.run(function($rootScope, $http) {
       set: function(value){
         $rootScope.player.volume.value = value;
         if($rootScope.player.playing){
-          $rootScope.player.audio.volume($rootScope.player.volume.value/100);
+          $rootScope.player.audio.set("volume", $rootScope.player.volume.value/100);
         }
       }
     }

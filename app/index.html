@@ -35,18 +35,20 @@
 			<span class="message">{{ loading.message }}</span>
 		</div>
 	</div>
-	<div class="search">
-		<label for="search">
-			<i class='icon ion-ios-search'></i>
-		</label>
-		<input id="search" type="text" placeholder="Search" ng-model="searching">
-	</div>
 	<div id="top-titlebar" class="top-titlebar">
 		<span class="logo-icon"><img src="./img/icon_64.png"></span>
 		<span class="title">PLÆR</span>
-		<i class='icon ion-refresh' ng-click="archive.scan();">rescan library</i>
+		<i class='icon ion-refresh' ng-click="archive.scan();"></i>
 		<span id="close-window-button" class="close-button"><i class="icon ion-ios-close-empty"></i></span>
 		<span id="minimize-window-button" class="minimize-button"><i class="icon ion-ios-minus-empty"></i></span>
+		<div class="search">
+			<label for="search">
+				<i class='icon ion-ios-search'></i>
+			</label>
+			<input id="search" type="text" placeholder="Search" ng-model="searching">
+		</div>
+	</div>
+	<div class="overtop">
 	</div>
 
 	<div id="sidepanel" class="left">
@@ -84,7 +86,7 @@
 	<script src="./js/localforage.min.js"></script>
 	<script src="./js/hammer.min.js"></script>
 	<script src="./js/window.js"></script>
-	<script src="./js/howler.min.js"></script>
+	<script src="./js/buzz.min.js"></script>
 	<script src="./js/angular/angular.min.js"></script>
 	<script src="./js/angular/angular-route.min.js"></script>
 	<script src="./js/controllers.js"></script>
