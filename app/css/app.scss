@@ -17,15 +17,20 @@ body{
 
 .notification{
 	position: fixed;
-  top: $title-height*1.5;
-  right: 4rem;
-  width: 20vw;
+  top: 4rem;
+  right: 3rem;
+  width: auto;
+  padding: 0rem 1rem;
+  font-size: 0.9rem;
   min-height: 2rem;
   background: rgba(255,255,255,0.8);
   color: #333;
   opacity: 0;
   transition: all 0.3s ease;
   text-align: right;
+  line-height: 2rem;
+  z-index: 10;
+  pointer-events: none;
 	&.visible{
 		opacity: 1;
 	}

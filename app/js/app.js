@@ -157,9 +157,9 @@ playerApp.run(function($rootScope, $http) {
                 tags.name = path.basename(item.path);
                 tags.path = item.path;
                 tags.relPath = path.relative(pathstr, item.path);
-                console.log(item.path)
-                console.log(tags.relPath)
-                items.push(tags)
+                items.push(tags);
+                $rootScope.notification.show(tags.title+' scanned');
+                $rootScope.$apply();
               });
             }
           }).on('end', function () {
