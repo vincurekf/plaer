@@ -484,6 +484,9 @@
             };
             this.addSource = function(src) {
                 var self = this, source = doc.createElement("source");
+                // > vincurekf edit
+                console.log( src );
+                // < vincurekf edit
                 source.src = src;
                 if (buzz.types[getExt(src)]) {
                     source.type = buzz.types[getExt(src)];

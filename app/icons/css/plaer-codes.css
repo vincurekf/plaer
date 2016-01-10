@@ -43,3 +43,7 @@
 .icon-loop:before { content: '\e829'; } /* '' */
 .icon-note:before { content: '\e82a'; } /* '' */
 .icon-folder-empty:before { content: '\e82b'; } /* '' */
+.icon-list-add:before { content: '\e82c'; } /* '' */
+.icon-trash:before { content: '\e82d'; } /* '' */
+.icon-right-open:before { content: '\e82e'; } /* '' */
+.icon-left-open:before { content: '\e82f'; } /* '' */

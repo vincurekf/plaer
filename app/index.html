@@ -17,6 +17,8 @@
 
 <body ng-app="playerApp" ng-controller="AppCtrl">
 
+	<div class="notification {{ notification.text !== '' ? 'visible' : ''}}">{{ notification.text }}</div>
+
 	<div id="loading" class="{{ loading.active === true ? 'active' : ''}}">
 		<div class="spinner">
 			<div class="rect1"></div>
@@ -51,12 +53,27 @@
 	<div class="overtop">
 	</div>
 
-	<div id="sidepanel" class="left">
-		<i class="icon icon-folder-empty"></i>
+	<div id="sidepanel" class="left {{ player.settings.visible === true ? 'visible' : '' }}">
+		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
 		<h3>Source</h3>
 		Current: <span class="source">{{ archive.folder }}</span><br>
 		Set new: <input ng-model="archive.newFolder" placeholder="New scan path">
 		<button ng-click="archive.setPath()" class="set-path">Scan path</button>
+	</div>
+
+	<div id="sidepanel" class="right playlist {{ player.playlist.visible === true ? 'visible' : '' }}">
+		<i class="icon icon-th-list" ng-click="player.playlist.toggle()"></i>
+		<i class="icon icon-trash" ng-click="player.playlist.clear()"></i>
+		<div class="scroll">
+		<h3>Playlist</h3>
+			<ul>
+				<li ng-repeat="song in player.playlist.list" class="song {{ player.songState(song) === true ? 'playing' : '' }}">
+					<i ng-click="player.toggle(song)" class="icon icon-{{ player.songState(song) === true ? 'stop' : 'play' }}"></i>
+					{{ song.title !== '' ? song.title : song.name }}
+					<i ng-click="player.playlist.remove(song)" class="icon icon-cancel"></i>
+				</li>
+			</ul>
+		</div>
 	</div>
 
 	<div id="page-holder" ng-view="">
@@ -72,8 +89,10 @@
 		<i ng-click="player.next(player.current)" class="icon icon-right-open-big"></i>
 		<i ng-click="player.random = !player.random" class="icon icon-shuffle {{ player.random === true ? 'true' : '' }}"></i>
 		<i ng-click="player.loop = !player.loop" class="icon icon-loop {{ player.loop === true ? 'true' : '' }}"></i>
-		<div class="info">
-			{{ player.current.name }}
+		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album)">
+			<span ng-if="player.current.artist">{{ player.current.artist }}<i class="icon  icon-right-open"></i></span>
+			<span ng-if="player.current.album">{{ player.current.album }}<i class="icon  icon-right-open"></i></span>
+			{{ player.current.title || player.current.title }}
 		</div>
 		<div class="volume">
       <label>
@@ -84,9 +103,10 @@
   </div>
 
 	<script src="./js/localforage.min.js"></script>
+	<script src="./js/mousetrap.min.js"></script>
 	<script src="./js/hammer.min.js"></script>
 	<script src="./js/window.js"></script>
-	<script src="./js/buzz.min.js"></script>
+	<script src="./js/buzz.js"></script>
 	<script src="./js/angular/angular.min.js"></script>
 	<script src="./js/angular/angular-route.min.js"></script>
 	<script src="./js/controllers.js"></script>

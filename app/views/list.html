@@ -3,11 +3,12 @@
     <div class="tri-view left">
       <h3>Artists</h3>
       <ul class="list">
-        <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.artist.get('')">
+        <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.set.artist()">
           ALL
         </li>
-        <li ng-repeat="artist in archive.artists | filter:searching" class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.artist.get(artist)">
+        <li ng-repeat="artist in archive.artists | filter:searching" class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.set.artist(artist)">
           {{ artist !== '' ? artist : 'unknown' }}
+          <i ng-click="player.playlist.add('artist', artist)" class="icon icon-list-add"><span>Add to playlist</span></i>
         </li>
       </ul>
     </div>
@@ -17,6 +18,7 @@
       <ul class="list">
         <li ng-repeat="album in list.current.albums" class="song {{ player.currAlbum(album) === true ? 'playing' : '' }}" ng-click="list.set.album(album)">
           {{ album }}
+          <i ng-click="player.playlist.add('album', album)" class="icon icon-list-add"><span>Add to playlist</span></i>
         </li>
       </ul>
     </div>
@@ -35,8 +37,10 @@
         </div>
       </div>
       <ul class="list {{ list.albumArt !== false ? 'with-art' : '' }}">
-        <li ng-repeat="song in list.current.songs" class="song {{ player.songState(song) === true ? 'playing' : '' }}" ng-click="player.toggle(song)">
-          <i class="icon icon-{{ player.songState(song) === true ? 'stop' : 'play' }}"></i> {{ song.title !== '' ? song.title : song.name }}
+        <li ng-repeat="song in list.current.songs" class="song {{ player.songState(song) === true ? 'playing' : '' }}">
+          <i ng-click="player.toggle(song)" class="icon icon-{{ player.songState(song) === true ? 'stop' : 'play' }}"></i>
+          {{ song.title !== '' ? song.title : song.name }}
+          <i ng-click="player.playlist.add('song', song)" class="icon icon-list-add"><span>Add to playlist</span></i>
         </li>
       </ul>
     </div>

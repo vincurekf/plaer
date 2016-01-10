@@ -32,7 +32,7 @@ playerApp.run(function($rootScope, $http) {
     artFNames: ['Cover.jpg', 'cover.jpg','front.jpg', 'Folder.jpg', 'AlbumArtLarge.jpg', 'AlbumArt.jpg', 'AlbumArtSmall.jpg'],
     init: function(folder){
       var self = this;
-
+      // get saved scan folder
       localforage.getItem('scan_folder', function(err, value) {
         console.log( value );
         if(value === null || err){
@@ -44,15 +44,16 @@ playerApp.run(function($rootScope, $http) {
         $rootScope.$apply();
       });
       console.log( self.folder );
-
+      // set final folder to scan
       this.folder = folder ? path.resolve(this.folder) : path.resolve(this.defaultDir);
-
+      // try to load saved list of scanned files
       try{
         var cachedFolders = fs.readJsonSync(self.cacheDir+'/cachedFolders.json', {throws: false});
       }catch(err){
         console.log( err );
         var cachedFolders = null;
       }
+      // if there is no such file, scan default folder and start app
       if(cachedFolders === null){
         console.log('scanning folders');
         this.scan(this.folder, function(files, artists, albums){
@@ -60,6 +61,7 @@ playerApp.run(function($rootScope, $http) {
           $rootScope.list.set.album(albums[0]);
         });
       }else{
+        // use chached data and do not scan folders for files
         console.log('using cached folders');
         $rootScope.archive.files = cachedFolders.files;
         $rootScope.archive.size = _.size(cachedFolders.files);
@@ -219,7 +221,6 @@ playerApp.run(function($rootScope, $http) {
         $rootScope.list.album = album;
         $rootScope.list.current.songs = _.where($rootScope.archive.files, { album: album });
         $rootScope.list.albumInfo = $rootScope.list.current.songs[0];
-        //console.log( $rootScope.list.albumInfo );
         $rootScope.list.albumInfo.size = _.size($rootScope.list.current.songs);
         $rootScope.list.albumArt = _.where($rootScope.archive.files, { album: album })[0].albumArt;
         if( !$rootScope.list.albumArt ){
@@ -230,10 +231,8 @@ playerApp.run(function($rootScope, $http) {
             $rootScope. $apply();
           });
         }
-      }
-    },
-    artist:{
-      get: function(artist){
+      },
+      artist:function(artist){
         var songs;
         if( artist ){
           songs = _.where( $rootScope.archive.files, { artist: artist });
@@ -251,7 +250,23 @@ playerApp.run(function($rootScope, $http) {
     },
     init: function(){
       console.log('init list');
-      this.artist.get();
+      this.set.artist();
+    }
+  }
+
+  $rootScope.notification = {
+    text: '',
+    timer: null,
+    show: function(text){
+      var self = this;
+      this.text = text;
+      if( this.timer ){
+        clearTimeout( this.timer );
+      }
+      this.timer = setTimeout( function(){
+        self.text = '';
+        $rootScope.$apply();
+      },3000);
     }
   }
 
@@ -263,6 +278,7 @@ playerApp.run(function($rootScope, $http) {
     playing: false,
     random: false,
     loop: false,
+    fromPlaylist: true,
     init: function(){
       var self = this;
       var postevak = document.getElementById('postevak');
@@ -275,6 +291,27 @@ playerApp.run(function($rootScope, $http) {
       behindH.on("panleft panright tap", function(ev) {
         self.position.seek(ev.center.x);
       });
+
+      // try to load saved playlist
+      try{
+        this.playlist.list = fs.readJsonSync(self.cacheDir+'/cachedPlaylist.json', {throws: false});
+      }catch(err){
+        console.log( err );
+        this.playlist.list = [];
+      }
+      // get saved scan folder
+      localforage.getItem('playlist_delay', function(err, value) {
+        console.log( value );
+        if(value === null || err){
+          self.playlist.delay = false;
+          $rootScope.$apply();
+          return
+        }
+        self.playlist.delay = parseInt(value);
+        $rootScope.$apply();
+      });
+      self.bindKeys();
+
     },
     currArtist: function(artist){
       return this.current ? (this.current.artist === artist) : false;
@@ -328,6 +365,58 @@ playerApp.run(function($rootScope, $http) {
         }
       });
     },
+    playlist: {
+      list: [],
+      visible: false,
+      random: false,
+      toggle: function(){
+        this.visible = !this.visible;
+      },
+      clear: function(){
+        this.list = [];
+      },
+      set: function(what, value){
+        // get saved scan folder
+        localforage.getItem('playlist_'+what, function(err, value) {
+          console.log( value );
+          if(value === null || err){
+            console.log( err );
+            return
+          }
+          self.playlist.delay = parseInt(value);
+          $rootScope.$apply();
+        });
+      },
+      add: function(type, data){
+        console.log( this );
+        var self = this;
+        if( type === "artist" ){
+          var thisArtist = _.where($rootScope.archive.files, { artist: data });
+          _.each( thisArtist, function(value, id){
+            self.list.push(angular.copy(value));
+            $rootScope.notification.show(thisArtist.length+' files added to playlist');
+          })
+        }else if( type === "album" ){
+          var thisAlbums = _.where($rootScope.archive.files, { album: data });
+          _.each( thisAlbums, function(value, id){
+            self.list.push(angular.copy(value));
+            $rootScope.notification.show(thisAlbums.length+' files added to playlist');
+          })
+        }else{
+          this.list.push(angular.copy(data));
+          $rootScope.notification.show('1 file added to playlist');
+        }
+      },
+      remove: function(file){
+        var id = this.list.indexOf(file);
+        console.log(id);
+        var odds = this.list.splice(id, 1);
+        if( this.list.length === 0 ){
+          this.list = [];
+        }
+        console.log(odds);
+      }
+    },
     onend: function(){
       var lastTrack = this.current;
       $rootScope.player.stop();
@@ -350,12 +439,20 @@ playerApp.run(function($rootScope, $http) {
       if( this.playing ){
         this.stop();
       }
-      var id = _.findIndex( $rootScope.archive.files, current);
-      var random = this.getRandom($rootScope.archive.size, 0);
+      var list = !_.isEmpty(this.playlist.list) ? this.playlist.list : $rootScope.archive.files;
+      console.log( list );
+      var id = _.findIndex( list, current);
+      var random = this.getRandom(list.length,0);
       var newId = this.random ? random : id+1;
-      var newFile = $rootScope.archive.files[newId];
+      console.log( id, this.random, random, newId );
+      var newFile = list[newId];
       if( newFile ){
         this.play(newFile);
+        if( !_.isEmpty(this.playlist) ){
+          this.playlist.remove(current);
+        };
+      }else{
+
       }
     },
     prew: function(current){
@@ -508,6 +605,41 @@ playerApp.run(function($rootScope, $http) {
           $rootScope.player.audio.set("volume", $rootScope.player.volume.value/100);
         }
       }
+    },
+    settings: {
+      visible: false,
+      toggle: function(){
+        console.log(this.visible);
+        this.visible = !this.visible;
+        console.log(this.visible);
+      }
+    },
+    find: function(){
+      document.getElementById('search').focus();
+    },
+    bindKeys: function(){
+      var self = this;
+      Mousetrap.bind(['command+left', 'ctrl+left'], function(e) {
+        self.prew(self.current);
+        return false
+      });
+      Mousetrap.bind(['command+right', 'ctrl+right'], function(e) {
+        self.next(self.current);
+        return false
+      });
+      Mousetrap.bind(['space'], function(e) {
+        self.pause();
+        return false
+      });
+      Mousetrap.bind(['shift+space'], function(e) {
+        self.stop();
+        $rootScope.$apply();
+        return false
+      });
+      Mousetrap.bind(['command+f', 'ctrl+f'], function(e) {
+        self.find();
+        return false
+      });
     }
   };
   $rootScope.player.init();

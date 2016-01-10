@@ -1,7 +1,6 @@
 // COLORS
 $main-bg-color: #000605;
-//$main-accent-color: #A60222;
-$main-accent-color: #FF7400;
+$main-accent-color: #FF6700;
 $main-font-color: #fff;
 
 // SIZES
@@ -14,6 +13,22 @@ body{
 	box-shadow: 0 0px 0 3px $main-bg-color inset;
 	font-size: 18px;
 	font-family: 'source_sans_prolight';
+}
+
+.notification{
+	position: fixed;
+  top: $title-height*1.5;
+  right: 4rem;
+  width: 20vw;
+  min-height: 2rem;
+  background: rgba(255,255,255,0.8);
+  color: #333;
+  opacity: 0;
+  transition: all 0.3s ease;
+  text-align: right;
+	&.visible{
+		opacity: 1;
+	}
 }
 
 .icon{
@@ -242,10 +257,20 @@ body{
 		left: $control-icon-width*5.3;
 	}
 	.info{
+		cursor: pointer;
 		position: absolute;
 		top: 0;
 		left: $control-icon-width*7.1;
 		overflow: hidden;
+		.icon-right-open {
+			position: relative !important;
+			display: inline-block;
+			left: auto;
+			width: 1rem;
+			&::before{
+				font-size: 12px;
+			}
+		}
 	}
 	.play{
 		position: absolute;
@@ -278,7 +303,10 @@ $sidepanel-width: 250px;
 	width: $sidepanel-width;
 	box-shadow: 1px 0 85px 0 rgba(0,0,0,0.2);
 	transition: all 0.3s ease;
-	.icon-folder-empty{
+	&:hover{
+		transform: translate(0,0);
+	}
+	.icon-cog, .icon-th-list{
 		width: $control-panel-height;
 		position: absolute;
 		right: 0;
@@ -286,7 +314,19 @@ $sidepanel-width: 250px;
 		transform: translate(100%,0);
 		z-index: 10;
 		color: $main-bg-color;
-		//background: rgba(255,255,255,0.95);
+	}
+	.icon-th-list{
+		right: auto;
+		left: 0;
+		transform: translate(-100%,0);
+	}
+	.icon-trash {
+		color: rgba($main-bg-color, 0.8);
+	  position: absolute;
+	  right: 1rem;
+	  top: 0;
+		z-index: 11;
+		text-shadow: 0 0 20px white, 0 0 10px white;
 	}
 	.source{
 		font-weight: 600;
@@ -294,21 +334,68 @@ $sidepanel-width: 250px;
 	&.left{
 		border-right: 2px solid white;
 		transform: translate(-100%,0);
+		&.visible{
+			transform: translate(0,0);
+		}
 	}
-	&:hover{
-		transform: translate(0,0);
+	&.right{
+		width: $sidepanel-width;
+		right: 0;
+		border-left: 2px solid white;
+		transform: translate(100%,0);
+		height: calc(100% - 7rem);
+		&.visible{
+			transform: translate(0,0);
+		}
 	}
-	#drop-box {
-	  width: calc($sidepanel-width - 2rem);
-	  height: calc($sidepanel-width - 2rem);
-	  background: rgba(0,0,0,0.1);
-		position: relative;
-		&::before{
-			content: "+";
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%,-50%);
+	&.playlist{
+		padding: 0;
+		margin: 0;
+		max-height: calc(100% - 7rem);
+		.scroll{
+			padding: 0;
+			margin: 0;
+			overflow-y: auto;
+			padding-bottom: 2rem;
+			max-height: 100%;
+			padding: 0 1rem;
+		}
+		ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			.song {
+			  font-size: 0.9rem;
+			  padding: 0;
+			  margin: 2px 0;
+			  height: 1.8rem;
+			  background: rgba(0,0,0,0.1);
+			  line-height: 1.8rem;
+				position: relative;
+				white-space: nowrap;
+				overflow: hidden;
+				&::before {
+				  content: "";
+				  width: 2rem;
+				  height: 2rem;
+				  background: red;
+				  position: absolute;
+				  right: 0;
+					background: linear-gradient(to right, transparent , white);
+				}
+				i, i::before{
+					width: 1.8rem;
+					height: 1.8rem;
+					line-height: 1.8rem;
+					color: #333;
+					font-size: 0.9rem;
+				}
+				.icon-cancel {
+					position: absolute;
+					right: 0;
+					top: 0;
+				}
+			}
 		}
 	}
 }
@@ -319,7 +406,7 @@ $sidepanel-width: 250px;
 	.song{
 		padding: 4px 10px;
 		margin: 0;
-		cursor: pointer;
+		position: relative;
 		&.playing{
 			background: rgba($main-bg-color, 0.2)
 		}
@@ -347,6 +434,28 @@ $sidepanel-width: 250px;
 			&.icon-play, &.icon-stop{
 				left: 0;
 			}
+			&.icon-list-add {
+				transition: all 0.2s ease;
+				opacity: 0;
+				visibility: hidden;
+			  position: absolute;
+				right: 0;
+				line-height: 1rem;
+				top: 0;
+				span{
+					color: $main-bg-color;
+					position: absolute;
+					left: 0;
+					top: 0;
+					line-height: 2.2rem;
+					font-size: 12px;
+					width: 5rem;
+					transform: translate(-90%,0);
+				}
+				&::before{
+					font-size: 0.9rem;
+				}
+			}
 		}
 		&:hover{
 			background: rgba($main-bg-color, 0.1);
@@ -354,6 +463,10 @@ $sidepanel-width: 250px;
 				color: $main-accent-color;
 				&::before{
 					color: rgba($main-accent-color, 0.8);
+				}
+				&.icon-list-add {
+					opacity: 1;
+					visibility: visible;
 				}
 			}
 		}
@@ -539,7 +652,7 @@ $sidepanel-width: 250px;
 	}
 	&.left{
 	  width: calc(27.5% - 3rem);
-  	left: $control-icon-width;
+  	left: 3rem;
 	}
 	&.middle{
 	  width: 27.5%;

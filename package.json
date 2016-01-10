@@ -1,7 +1,7 @@
 {
     "webexe_settings": {
         "linux-x32": false,
-        "export_dir": "/home/amotio/git/plaer_builds",
+        "export_dir": "/home/amotio/git/plaer",
         "windows-x64": false,
         "uncompressed_folder": false,
         "download_dir": "/home/amotio/.local/share/Web2Executable/files/downloads",
@@ -21,12 +21,11 @@
     ],
     "inject-js-end": "",
     "node-remote": "",
-    "node-main": "",
     "dependencies": {
-        "nw-notify": "",
+        "fs-extra": "^0.26.4",
         "underscore": "",
         "request": "",
-        "fs-extra": "^0.26.4",
+        "nw-notify": "",
         "id3js": "",
         "getdirs": ""
     },
@@ -37,9 +36,9 @@
     },
     "js-flags": "",
     "app_name": "plaer",
-    "single-instance": false,
     "name": "PLAER",
     "user-agent": "",
+    "single-instance": false,
     "window": {
         "show": false,
         "always-on-top": false,
@@ -73,5 +72,6 @@
     ],
     "inject-js-start": "",
     "main": "./app/index.html",
-    "chromium-args": ""
+    "chromium-args": "",
+    "node-main": ""
 }
