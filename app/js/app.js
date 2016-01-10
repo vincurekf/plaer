@@ -350,7 +350,7 @@ playerApp.run(function($rootScope, $http) {
               $rootScope.$apply();
             });
             self.audio.bind("ended", function(e) {
-              $rootScope.player.onend();;
+              $rootScope.player.onend();
             });
             self.audio.play();
             // show notification
@@ -428,10 +428,7 @@ playerApp.run(function($rootScope, $http) {
           this.play( newFile );
         }
       }else{
-        var random = this.getRandom($rootScope.archive.size, 0);
-        var newId = this.random ? random : id+1;
-        var newFile = $rootScope.archive.files[newId];
-        this.play( newFile );
+        this.next( this.current );
       }
       $rootScope.$apply();
     },
