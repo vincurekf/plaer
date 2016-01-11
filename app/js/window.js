@@ -30,11 +30,13 @@ var viewbox = {
       /*
       */
       // attach actions to UI buttons
-      $("#close-window-button").on('click', function() {
+      var closeButton = document.getElementById('close-window-button');
+      closeButton.addEventListener('click', function() {
         //
         mainwin.close();
       });
-      $("#minimize-window-button").on('click', function() {
+      var minimizeButton = document.getElementById('minimize-window-button');
+      minimizeButton.addEventListener('click', function() {
         //
         mainwin.minimize();
       });
@@ -88,8 +90,8 @@ var viewbox = {
       viewbox.focus(true);
     }
     window.onblur = function() {
-      console.log("blur");
-      //viewbox.focus(false);
+      //console.log("blur");
+      viewbox.focus(false);
     }
   },
   get: function( setTray ){
@@ -195,8 +197,5 @@ var viewbox = {
   },
   focus: function( focus ) {
     focused = focus;
-    var opacity = focus ? "FF" : "90";
-    var titlebar = $("#top-titlebar");
-    if (titlebar) titlebar.css('background', '#'+opacity+'26282c' );
   },
 }; viewbox.init( true );
