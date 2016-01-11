@@ -25,7 +25,10 @@ Nothing more and nothing less.
 Build on nw.js (on v0.12.3, linux 64bit tested and working), so it is just Java Script and HTML + CSS.
 
 ## Installation
-To use Plaer you need to have nodejs and npm installed. How to install nodejs (and npm) see [nodejs.org](https://nodejs.org/en/).
+If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/tree/v0.0.1-alpha). 
+
+## Building
+To use build your own version you need to have nodejs and npm installed. How to install nodejs (and npm) see [nodejs.org](https://nodejs.org/en/).
 
 When you have nodejs (and npm) installed and working:
 
