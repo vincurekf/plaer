@@ -152,9 +152,10 @@ playerApp.run(function($rootScope, $http) {
           //
           if( album && album.artworkUrl100 ){
             console.log( item );
-            self.saveArt(album.artworkUrl100, path.dirname(item.path)+'/AlbumArtSmall.jpg', function(){
+            var bigCover = album.artworkUrl100.replace("100x100bb", "1200x1200bb");
+            self.saveArt(bigCover, path.dirname(item.path)+'/Cover.jpg', function(){
               console.log('done');
-              var relativePath = path.resolve('../', path.dirname(item.path)+'/AlbumArtSmall.jpg');
+              var relativePath = path.resolve('../', path.dirname(item.path)+'/Cover.jpg');
               console.log(relativePath);
               cb(null,relativePath);
             });
@@ -191,6 +192,7 @@ playerApp.run(function($rootScope, $http) {
       var sorted = {} // autor > album > song
       var artists = [] // all artists
       var albums = [] // all albums
+      $rootScope.library.data = {};
       try{
         var foldPath = sourcePath || this.folder;
         pathstr = path.dirname(process.execPath);
@@ -214,8 +216,8 @@ playerApp.run(function($rootScope, $http) {
                 fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
                 // assign artist and album to array
-                if( !_.contains(albums, fileItem.album) ) albums.push(fileItem.album);
-                if( !_.contains(artists, fileItem.artist) ) artists.push(fileItem.artist);
+                if( !_.contains(albums, fileItem.album) && fileItem.album !== [] ) albums.push(fileItem.album);
+                if( !_.contains(artists, fileItem.artist) && fileItem.artist !== [] ) artists.push(fileItem.artist);
                 // assign to artist > album > file
                 if( !$rootScope.library.data[fileItem.artist] ) $rootScope.library.data[fileItem.artist] = {};
                 if( !$rootScope.library.data[fileItem.artist][fileItem.album] ) $rootScope.library.data[fileItem.artist][fileItem.album] = {};
@@ -237,8 +239,6 @@ playerApp.run(function($rootScope, $http) {
             });
             // save sorted list
             console.dir( $rootScope.library.data );
-            //console.dir( 'sorted', sorted );
-            //$rootScope.library.data = sorted;
             // remove duplicates
             items = _.uniq(items);
             console.dir( 'items', items );
