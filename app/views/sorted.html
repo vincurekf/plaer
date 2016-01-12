@@ -1,15 +1,30 @@
 <div id="main-view">
 
-    <div class="tri-view left">
-      <h3>Artists</h3>
-      <ul class="list">
-        <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="sortedList.set()">
-          ALL
-        </li>
-        <li ng-repeat="item in sortedList.data | filter:searching" class="song">
-          <span ng-click="sortedList.set()">{{ sortedList.data.indexOf(item) }}</span>
-          <i ng-click="player.playlist.add('artist', artist)" class="icon icon-list-add"><span>Add to playlist</span></i>
-        </li>
+    <div class="library">
+
+      <h3>
+        <span ng-click="library.reset()">Library</span>
+        <span ng-if="library.title.artist" ng-click="library.set('artist', library.title.artist)"><i class="icon icon-right-open"></i>{{ library.title.artist }}</span>
+        <span ng-if="library.title.album"><i class="icon icon-right-open"></i>{{ library.title.album }}</span>
+      </h3>
+
+      <div ng-if="library.currentView === 'library'" ng-repeat="item in library.data | filter:searching" class="artist">
+        <span ng-click="library.set('artist',item)">{{ library.findKey(library.data,item) }}</span>
+        <i ng-click="player.playlist.add('artist', library.findKey(library.data,item))" class="icon icon-list-add"><span>Add to playlist</span></i>
+        <i ng-click="player.playlist.add('artist', library.findKey(library.data,item));player.play()" class="icon icon-play"><span>Play all</span></i>
+      </div>
+
+      <div ng-if="library.currentView === 'artist'" ng-repeat="item in library.current.artist | filter:searching" class="artist">
+        <span ng-click="library.set('album',item)">{{ library.findKey(library.current.artist,item) }}</span>
+        <i ng-click="player.playlist.add('album', library.findKey(library.current.artist,item))" class="icon icon-list-add"><span>Add to playlist</span></i>
+        <i ng-click="player.playlist.add('album', library.findKey(library.current.artist,item));player.play()" class="icon icon-play"><span>Play all</span></i>
+      </div>
+
+      <div ng-if="library.currentView === 'album'" ng-repeat="item in library.current.album | filter:searching" class="song">
+        <span ng-click="player.play(item)">{{ item.title }}</span>
+        <i ng-click="player.playlist.add('', item)" class="icon icon-list-add"><span>Add to playlist</span></i>
+        <i ng-click="player.playlist.add('', item);player.play()" class="icon icon-play"><span>Play all</span></i>
+      </div>
       </ul>
     </div>
 

@@ -18,21 +18,39 @@ playerApp.run(function($rootScope, $http) {
   };
   //
 
-  $rootScope.sortedList = {
+  $rootScope.findKey = function(array,item){
+    return _.findKey(array, item);
+  };
+
+  $rootScope.library = {
     data: [],
-    currentData: [],
-    currentPath: '',
-    set: function(arr){
-      console.log( arr );
-      var path = '';
-      for( var id in arr ){
-        path += id+'/'
+    current: [],
+    currentView: 'library',
+    title: [],
+    findKey: function(array, item){
+      return _.findKey(array, item);
+    },
+    set: function(type,arr){
+      var data = typeof arr === 'object' ? arr : this.data[arr];
+      console.log( this.currentView );
+      this.current[type] = data;
+      this.currentView = type;
+      if( type === 'album' ){
+        this.currentTitle = this.findKey(this.data[this.title.artist],data);
+      }else{
+        this.currentTitle = this.findKey(this.data,data);
+        this.title.album = null;
       }
-      console.log( path );
+      this.title[type] = this.currentTitle;
+      console.log(this.title[type]);
+    },
+    reset: function(){
+      this.current = [];
+      this.currentView = 'library';
+      this.title = [];
     },
     init: function(){
       console.log(this.data);
-      this.currentData = this.data;
     }
   }
 
@@ -66,38 +84,39 @@ playerApp.run(function($rootScope, $http) {
       this.folder = folder ? path.resolve(this.folder) : path.resolve(this.defaultDir);
       // try to load saved list of scanned files
       try{
-        var cachedFolders = fs.readJsonSync(self.cacheDir+'/cachedFolders.json', {throws: false});
+        var cachedFiles = fs.readJsonSync(self.cacheDir+'/cachedFiles.json', {throws: false});
       }catch(err){
         console.log( err );
-        var cachedFolders = null;
+        var cachedFiles = null;
       }
       try{
-        $rootScope.sortedList.data = fs.readJsonSync(self.cacheDir+'/cachedSortedArtists.json', {throws: false});
+        $rootScope.library.data = fs.readJsonSync(self.cacheDir+'/cachedLibrary.json', {throws: false});
       }catch(err){
         console.log( err );
-        $rootScope.sortedList.data = null;
+        $rootScope.library.data = null;
       }
       // if there is no such file, scan default folder and start app
-      if(cachedFolders === null || $rootScope.sortedList.data === null){
+      if(cachedFiles === null || $rootScope.library.data === null){
         console.log('scanning folders');
         this.scan(this.folder, function(files, artists, albums){
           // set default album to first album in array
           $rootScope.list.set.album(albums[0]);
-          $rootScope.sortedList.init();
+          $rootScope.library.init();
         });
       }else{
         // use chached data and do not scan folders for files
         console.log('using cached folders');
-        $rootScope.archive.files = cachedFolders.files;
-        $rootScope.archive.size = _.size(cachedFolders.files);
-        $rootScope.archive.artists = cachedFolders.artists;
-        $rootScope.archive.albums = cachedFolders.albums;
+        $rootScope.archive.files = cachedFiles.files;
+        $rootScope.archive.size = _.size(cachedFiles.files);
+        $rootScope.archive.artists = cachedFiles.artists;
+        $rootScope.archive.albums = cachedFiles.albums;
         $rootScope.loading.active = false;
         // apply changes to scope
-        console.dir($rootScope.archive.files)
+        console.dir($rootScope.archive.files);
+        console.dir($rootScope.library.data);
         $rootScope.$apply();
-        $rootScope.sortedList.init();
-        //$rootScope.list.set.album(cachedFolders.albums[0]);
+        $rootScope.library.init();
+        //$rootScope.list.set.album(cachedFiles.albums[0]);
       }
     },
     checkArt: function(item){
@@ -170,11 +189,14 @@ playerApp.run(function($rootScope, $http) {
 
       var items = [] // files, directories, symlinks, etc
       var sorted = {} // autor > album > song
+      var artists = [] // all artists
+      var albums = [] // all albums
       try{
         var foldPath = sourcePath || this.folder;
         pathstr = path.dirname(process.execPath);
         foldPath = path.resolve(pathstr, foldPath);
         console.log( pathstr );
+        var fileId = 1;
         fs.walk(foldPath).on('data', function (item) {
             var extname = path.extname(item.path);
             if( extname === '.mp3' || extname === '.flac' ){
@@ -183,6 +205,7 @@ playerApp.run(function($rootScope, $http) {
                 var fileItem = {};
                 // add tags and push to array
                 var albumArt = self.checkArt(item);
+                fileItem.id = fileId;
                 fileItem.name = path.basename(item.path);
                 fileItem.title = metadata.title || fileItem.name;
                 fileItem.artist = metadata.artist[0] || metadata.artist;
@@ -190,14 +213,19 @@ playerApp.run(function($rootScope, $http) {
                 fileItem.path = item.path;
                 fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
+                // assign artist and album to array
+                if( !_.contains(albums, fileItem.album) ) albums.push(fileItem.album);
+                if( !_.contains(artists, fileItem.artist) ) artists.push(fileItem.artist);
+                // assign to artist > album > file
                 if( !sorted[fileItem.artist] ) sorted[fileItem.artist] = {};
                 if( !sorted[fileItem.artist][fileItem.album] ) sorted[fileItem.artist][fileItem.album] = {};
+                $rootScope.library.data[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
                 sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
-                //sorted[fileItem.artist][fileItem.album].push(fileItem);
-                //console.log(fileItem);
+                //
                 items.push(fileItem);
                 $rootScope.notification.show(fileItem.title+' scanned');
                 $rootScope.$apply();
+                fileId++
               });
             }
           }).on('end', function () {
@@ -208,43 +236,44 @@ playerApp.run(function($rootScope, $http) {
               console.log( value );
             });
             // save sorted list
-            console.log( sorted );
-            $rootScope.sortedList.data = sorted;
+            console.log( $rootScope.library.data );
+            console.dir( 'sorted', sorted );
+            $rootScope.library.data = sorted;
             // remove duplicates
             items = _.uniq(items);
-            console.log( items );
+            console.dir( 'items', items );
             // assign folders
             $rootScope.archive.files = _.sortBy(items, 'path');
             // total ammount of songs
             $rootScope.archive.size = _.size(items);
             // pick artist names
-            $rootScope.archive.artists = _.compact(_.uniq(_.flatten(_.pluck(items, 'artist'))));
-            //console.log( $rootScope.archive.artists );
+            $rootScope.archive.artists = artists;;
             // pick album names
-            $rootScope.archive.albums = _.compact(_.uniq(_.pluck(items, 'album')));
-            //console.log( $rootScope.archive.albums );
-            // hide loading splashscreen
+            $rootScope.archive.albums = albums;
+            // hide loading overlay
             $rootScope.loading.active = false;
             // apply changes to scope
             $rootScope.$apply();
             // archive current listed files for future startup
             setTimeout(function(){
-              fs.outputJson(self.cacheDir+'/cachedFolders.json',{
+              fs.outputJson(self.cacheDir+'/cachedFiles.json',{
                   files: items,
                   artists: $rootScope.archive.artists,
                   albums: $rootScope.archive.albums
                 }, function (err) {
                 if( err ) console.log(err);
                 console.log('saved');
+                $rootScope.notification.show('File cache saved.');
+                $rootScope.$apply();
               });
               console.log( sorted );
-              fs.outputJson(self.cacheDir+'/cachedSortedArtists.json',{
-                  sorted: sorted
-                }, function (err) {
+              fs.outputJson(self.cacheDir+'/cachedLibrary.json', sorted, function (err) {
                 if( err ) console.log(err);
                 console.log('saved');
+                $rootScope.notification.show('Library cache saved.');
+                $rootScope.$apply();
               });
-            },1000);
+            },1500);
             // call cb
             if(cb) cb($rootScope.archive.files, $rootScope.archive.artists, $rootScope.archive.albums);
           }
@@ -379,6 +408,9 @@ playerApp.run(function($rootScope, $http) {
     play: function(file){
       var self = this;
           file = file || self.current;
+      if( self.playing ){
+        self.stop();
+      };
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
       console.log( file );
@@ -386,7 +418,7 @@ playerApp.run(function($rootScope, $http) {
         console.log(exists);
         if( !exists ){
           alert('file does not exist');
-          $rootScope.loading.active = true;
+          $rootScope.loading.active = false;
           return false
         }else{
           // load and play audio
