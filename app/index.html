@@ -88,7 +88,7 @@
 		<i ng-click="player.next(player.current)" class="icon icon-right-open-big"></i>
 		<i ng-click="player.random = !player.random" class="icon icon-shuffle {{ player.random === true ? 'true' : '' }}"></i>
 		<i ng-click="player.loop = !player.loop" class="icon icon-loop {{ player.loop === true ? 'true' : '' }}"></i>
-		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album)">
+		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album);library.set('artist',player.current.artist);">
 			<span ng-if="player.current.artist">{{ player.current.artist }}<i class="icon  icon-right-open"></i></span>
 			<span ng-if="player.current.album">{{ player.current.album }}<i class="icon  icon-right-open"></i></span>
 			{{ player.current.title || player.current.name }}

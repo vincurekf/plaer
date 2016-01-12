@@ -217,10 +217,10 @@ playerApp.run(function($rootScope, $http) {
                 if( !_.contains(albums, fileItem.album) ) albums.push(fileItem.album);
                 if( !_.contains(artists, fileItem.artist) ) artists.push(fileItem.artist);
                 // assign to artist > album > file
-                if( !sorted[fileItem.artist] ) sorted[fileItem.artist] = {};
-                if( !sorted[fileItem.artist][fileItem.album] ) sorted[fileItem.artist][fileItem.album] = {};
+                if( !$rootScope.library.data[fileItem.artist] ) $rootScope.library.data[fileItem.artist] = {};
+                if( !$rootScope.library.data[fileItem.artist][fileItem.album] ) $rootScope.library.data[fileItem.artist][fileItem.album] = {};
                 $rootScope.library.data[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
-                sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
+                //sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
                 //
                 items.push(fileItem);
                 $rootScope.notification.show(fileItem.title+' scanned');
@@ -236,9 +236,9 @@ playerApp.run(function($rootScope, $http) {
               console.log( value );
             });
             // save sorted list
-            console.log( $rootScope.library.data );
-            console.dir( 'sorted', sorted );
-            $rootScope.library.data = sorted;
+            console.dir( $rootScope.library.data );
+            //console.dir( 'sorted', sorted );
+            //$rootScope.library.data = sorted;
             // remove duplicates
             items = _.uniq(items);
             console.dir( 'items', items );
@@ -266,8 +266,7 @@ playerApp.run(function($rootScope, $http) {
                 $rootScope.notification.show('File cache saved.');
                 $rootScope.$apply();
               });
-              console.log( sorted );
-              fs.outputJson(self.cacheDir+'/cachedLibrary.json', sorted, function (err) {
+              fs.outputJson(self.cacheDir+'/cachedLibrary.json', $rootScope.library.data, function (err) {
                 if( err ) console.log(err);
                 console.log('saved');
                 $rootScope.notification.show('Library cache saved.');
@@ -407,7 +406,7 @@ playerApp.run(function($rootScope, $http) {
     },
     play: function(file){
       var self = this;
-          file = file || self.current;
+          file = file || self.current || self.playlist.list[0] || null;
       if( self.playing ){
         self.stop();
       };
@@ -425,9 +424,7 @@ playerApp.run(function($rootScope, $http) {
           self.playing = true;
           self.current = file;
           var fileBuff = fs.readFileSync(file.path);
-
           self.audio = AV.Player.fromBuffer(fileBuff);
-
           self.audio.on('ready', function(){
             console.log( 'ready' );
             $rootScope.loading.active = false;
@@ -759,8 +756,8 @@ playerApp.config(['$routeProvider',
       templateUrl: 'views/list.html',
       controller: 'ListCtrl'
     })
-    .when('/sorted', {
-      templateUrl: 'views/sorted.html',
+    .when('/library', {
+      templateUrl: 'views/library.html',
       controller: 'ListCtrl'
     })
     .otherwise({
