@@ -1,0 +1,816 @@
+{
+  "sorted": {
+    "The Prodigy": {
+      "Always Outnumbered Never Outgunned": {
+        "Girls": {
+          "name": "02 Girls.mp3",
+          "title": "Girls",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/02 Girls.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/02 Girls.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Memphis Bell": {
+          "name": "03 Memphis Bell.mp3",
+          "title": "Memphis Bell",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/03 Memphis Bell.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/03 Memphis Bell.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Get Up Get Off": {
+          "name": "04 Get Up Get Off.mp3",
+          "title": "Get Up Get Off",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/04 Get Up Get Off.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/04 Get Up Get Off.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Hotride": {
+          "name": "05 Hotride.mp3",
+          "title": "Hotride",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/05 Hotride.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/05 Hotride.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Wake Up Call": {
+          "name": "06 Wake Up Call.mp3",
+          "title": "Wake Up Call",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/06 Wake Up Call.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/06 Wake Up Call.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Action Radar": {
+          "name": "07 Action Radar.mp3",
+          "title": "Action Radar",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/07 Action Radar.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/07 Action Radar.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Medusas Path": {
+          "name": "08 Medusas Path.mp3",
+          "title": "Medusas Path",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/08 Medusas Path.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/08 Medusas Path.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Pheonix": {
+          "name": "09 Pheonix.mp3",
+          "title": "Pheonix",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/09 Pheonix.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/09 Pheonix.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "You Will Be Under My Wheels": {
+          "name": "10 You Will Be Under My Wheels.mp3",
+          "title": "You Will Be Under My Wheels",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/10 You Will Be Under My Wheels.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/10 You Will Be Under My Wheels.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "The Way It": {
+          "name": "11 The Way It.mp3",
+          "title": "The Way It",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/11 The Way It.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/11 The Way It.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        },
+        "Shoot Down": {
+          "name": "12 Shoot Down.mp3",
+          "title": "Shoot Down",
+          "artist": "The Prodigy",
+          "album": "Always Outnumbered Never Outgunned",
+          "path": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/12 Shoot Down.mp3",
+          "relPath": "../../Music/The Prodigy/Always Outnumbered Never Outgu/12 Shoot Down.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Always Outnumbered Never Outgu/Folder.jpg"
+        }
+      },
+      "Experience": {
+        "Jericho": {
+          "name": "01 Jericho.mp3",
+          "title": "Jericho",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/01 Jericho.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/01 Jericho.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Music Reach (1-2-3-4)": {
+          "name": "02 Music Reach (1-2-3-4).mp3",
+          "title": "Music Reach (1-2-3-4)",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/02 Music Reach (1-2-3-4).mp3",
+          "relPath": "../../Music/The Prodigy/Experience/02 Music Reach (1-2-3-4).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Wind It Up": {
+          "name": "03 Wind It Up.mp3",
+          "title": "Wind It Up",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/03 Wind It Up.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/03 Wind It Up.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Your Love (Remix)": {
+          "name": "04 Your Love (Remix).mp3",
+          "title": "Your Love (Remix)",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/04 Your Love (Remix).mp3",
+          "relPath": "../../Music/The Prodigy/Experience/04 Your Love (Remix).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Charly (Trip Into Drum and Bas": {
+          "name": "06 Charly (Trip Into Drum and Bas.mp3",
+          "title": "Charly (Trip Into Drum and Bas",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/06 Charly (Trip Into Drum and Bas.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/06 Charly (Trip Into Drum and Bas.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Hyperspeed (G-Force Part 2)": {
+          "name": "05 Hyperspeed (G-Force Part 2).mp3",
+          "title": "Hyperspeed (G-Force Part 2)",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/05 Hyperspeed (G-Force Part 2).mp3",
+          "relPath": "../../Music/The Prodigy/Experience/05 Hyperspeed (G-Force Part 2).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Out Of Space": {
+          "name": "07 Out Of Space.mp3",
+          "title": "Out Of Space",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/07 Out Of Space.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/07 Out Of Space.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Everybody In The Place (155 An": {
+          "name": "08 Everybody In The Place (155 An.mp3",
+          "title": "Everybody In The Place (155 An",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/08 Everybody In The Place (155 An.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/08 Everybody In The Place (155 An.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Weather Experience": {
+          "name": "09 Weather Experience.mp3",
+          "title": "Weather Experience",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/09 Weather Experience.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/09 Weather Experience.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Fire (Sunrise Version)": {
+          "name": "10 Fire (Sunrise Version).mp3",
+          "title": "Fire (Sunrise Version)",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/10 Fire (Sunrise Version).mp3",
+          "relPath": "../../Music/The Prodigy/Experience/10 Fire (Sunrise Version).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Ruff In The Jungle Bizness": {
+          "name": "11 Ruff In The Jungle Bizness.mp3",
+          "title": "Ruff In The Jungle Bizness",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/11 Ruff In The Jungle Bizness.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/11 Ruff In The Jungle Bizness.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        },
+        "Death Of The Prodigy Dancers (": {
+          "name": "12 Death Of The Prodigy Dancers (.mp3",
+          "title": "Death Of The Prodigy Dancers (",
+          "artist": "The Prodigy",
+          "album": "Experience",
+          "path": "/home/amotio/Music/The Prodigy/Experience/12 Death Of The Prodigy Dancers (.mp3",
+          "relPath": "../../Music/The Prodigy/Experience/12 Death Of The Prodigy Dancers (.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience/Folder.jpg"
+        }
+      },
+      "Experience Expanded": {
+        "Jericho": {
+          "name": "01 Jericho.mp3",
+          "title": "Jericho",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/01 Jericho.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/01 Jericho.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Your Love": {
+          "name": "01 Your Love.mp3",
+          "title": "Your Love",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/01 Your Love.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/01 Your Love.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Music Reach (1234)": {
+          "name": "02 Music Reach (1234).mp3",
+          "title": "Music Reach (1234)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/02 Music Reach (1234).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/02 Music Reach (1234).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Ruff In The Jungle (Uplifting": {
+          "name": "02 Ruff In The Jungle (Uplifting.mp3",
+          "title": "Ruff In The Jungle (Uplifting",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/02 Ruff In The Jungle (Uplifting.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/02 Ruff In The Jungle (Uplifting.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Fire (edit)": {
+          "name": "03 Fire (edit).mp3",
+          "title": "Fire (edit)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/03 Fire (edit).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/03 Fire (edit).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Wind It Up": {
+          "name": "03 Wind It Up.mp3",
+          "title": "Wind It Up",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/03 Wind It Up.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/03 Wind It Up.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "We Are The Ruffest": {
+          "name": "04 We Are The Ruffest.mp3",
+          "title": "We Are The Ruffest",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/04 We Are The Ruffest.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/04 We Are The Ruffest.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Your Love (Remix)": {
+          "name": "04 Your Love (Remix).mp3",
+          "title": "Your Love (Remix)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/04 Your Love (Remix).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/04 Your Love (Remix).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Hyperspeed (G-Force Part 2)": {
+          "name": "05 Hyperspeed (G-Force Part 2).mp3",
+          "title": "Hyperspeed (G-Force Part 2)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/05 Hyperspeed (G-Force Part 2).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/05 Hyperspeed (G-Force Part 2).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Weather Experience (Top Buzz R": {
+          "name": "05 Weather Experience (Top Buzz R.mp3",
+          "title": "Weather Experience (Top Buzz R",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/05 Weather Experience (Top Buzz R.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/05 Weather Experience (Top Buzz R.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Charly (Trip Into Drum And Bas": {
+          "name": "06 Charly (Trip Into Drum And Bas.mp3",
+          "title": "Charly (Trip Into Drum And Bas",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/06 Charly (Trip Into Drum And Bas.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/06 Charly (Trip Into Drum And Bas.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Wind It Up (Rewound)": {
+          "name": "06 Wind It Up (Rewound).mp3",
+          "title": "Wind It Up (Rewound)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/06 Wind It Up (Rewound).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/06 Wind It Up (Rewound).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "G-Force (Energy Flow)": {
+          "name": "07 G-Force (Energy Flow).mp3",
+          "title": "G-Force (Energy Flow)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/07 G-Force (Energy Flow).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/07 G-Force (Energy Flow).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Out Of Space": {
+          "name": "07 Out Of Space.mp3",
+          "title": "Out Of Space",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/07 Out Of Space.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/07 Out Of Space.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Crazy Man": {
+          "name": "08 Crazy Man.mp3",
+          "title": "Crazy Man",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/08 Crazy Man.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/08 Crazy Man.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Everybody In The Place (155 An": {
+          "name": "08 Everybody In The Place (155 An.mp3",
+          "title": "Everybody In The Place (155 An",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/08 Everybody In The Place (155 An.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/08 Everybody In The Place (155 An.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Out Of Space (Techno Underworl": {
+          "name": "09 Out Of Space (Techno Underworl.mp3",
+          "title": "Out Of Space (Techno Underworl",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/09 Out Of Space (Techno Underworl.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/09 Out Of Space (Techno Underworl.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Weather Experience": {
+          "name": "09 Weather Experience.mp3",
+          "title": "Weather Experience",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/09 Weather Experience.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/09 Weather Experience.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Everybody In The Place (Fairgr": {
+          "name": "10 Everybody In The Place (Fairgr.mp3",
+          "title": "Everybody In The Place (Fairgr",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/10 Everybody In The Place (Fairgr.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/10 Everybody In The Place (Fairgr.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Fire (Sunrise Version)": {
+          "name": "10 Fire (Sunrise Version).mp3",
+          "title": "Fire (Sunrise Version)",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/10 Fire (Sunrise Version).mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/10 Fire (Sunrise Version).mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Ruff In The Jungle Bizness": {
+          "name": "11 Ruff In The Jungle Bizness.mp3",
+          "title": "Ruff In The Jungle Bizness",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/11 Ruff In The Jungle Bizness.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/11 Ruff In The Jungle Bizness.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        },
+        "Death Of The Prodigy Dancers (": {
+          "name": "12 Death Of The Prodigy Dancers (.mp3",
+          "title": "Death Of The Prodigy Dancers (",
+          "artist": "The Prodigy",
+          "album": "Experience Expanded",
+          "path": "/home/amotio/Music/The Prodigy/Experience Expanded/12 Death Of The Prodigy Dancers (.mp3",
+          "relPath": "../../Music/The Prodigy/Experience Expanded/12 Death Of The Prodigy Dancers (.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Experience Expanded/Folder.jpg"
+        }
+      },
+      "Invaders Must Die (Ltd. Deluxe Edition)": {
+        "Invaders Must Die": {
+          "name": "01 Invaders Must Die.mp3",
+          "title": "Invaders Must Die",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/01 Invaders Must Die.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/01 Invaders Must Die.mp3",
+          "albumArt": false
+        },
+        "Omen": {
+          "name": "02 Omen.mp3",
+          "title": "Omen",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/02 Omen.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/02 Omen.mp3",
+          "albumArt": false
+        },
+        "Thunder": {
+          "name": "03 Thunder.mp3",
+          "title": "Thunder",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/03 Thunder.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/03 Thunder.mp3",
+          "albumArt": false
+        },
+        "Colours": {
+          "name": "04 Colours.mp3",
+          "title": "Colours",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/04 Colours.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/04 Colours.mp3",
+          "albumArt": false
+        },
+        "Take Me To The Hospital": {
+          "name": "05 Take Me To The Hospital.mp3",
+          "title": "Take Me To The Hospital",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/05 Take Me To The Hospital.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/05 Take Me To The Hospital.mp3",
+          "albumArt": false
+        },
+        "Warriors Dance": {
+          "name": "06 Warriors Dance.mp3",
+          "title": "Warriors Dance",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/06 Warriors Dance.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/06 Warriors Dance.mp3",
+          "albumArt": false
+        },
+        "Run With The Wolves": {
+          "name": "07 Run With The Wolves.mp3",
+          "title": "Run With The Wolves",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/07 Run With The Wolves.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/07 Run With The Wolves.mp3",
+          "albumArt": false
+        },
+        "Omen (reprise)": {
+          "name": "08 Omen (reprise).mp3",
+          "title": "Omen (reprise)",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/08 Omen (reprise).mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/08 Omen (reprise).mp3",
+          "albumArt": false
+        },
+        "World's On Fire": {
+          "name": "09 World's On Fire.mp3",
+          "title": "World's On Fire",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/09 World's On Fire.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/09 World's On Fire.mp3",
+          "albumArt": false
+        },
+        "Piranha": {
+          "name": "10 Piranha.mp3",
+          "title": "Piranha",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/10 Piranha.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/10 Piranha.mp3",
+          "albumArt": false
+        },
+        "Stand Up": {
+          "name": "11 Stand Up.mp3",
+          "title": "Stand Up",
+          "artist": "The Prodigy",
+          "album": "Invaders Must Die (Ltd. Deluxe Edition)",
+          "path": "/home/amotio/Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/11 Stand Up.mp3",
+          "relPath": "../../Music/The Prodigy/Invaders Must Die (Ltd_ Deluxe/11 Stand Up.mp3",
+          "albumArt": false
+        }
+      },
+      "Music For The Jilted Generation": {
+        "Intro": {
+          "name": "01 Intro.mp3",
+          "title": "Intro",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/01 Intro.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/01 Intro.mp3",
+          "albumArt": false
+        },
+        "Break & Enter": {
+          "name": "02 Break & Enter.mp3",
+          "title": "Break & Enter",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/02 Break & Enter.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/02 Break & Enter.mp3",
+          "albumArt": false
+        },
+        "Their Law (feat. Pop Will Eat Itself}": {
+          "name": "03 Their Law (feat_ Pop Will Eat.mp3",
+          "title": "Their Law (feat. Pop Will Eat Itself}",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/03 Their Law (feat_ Pop Will Eat.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/03 Their Law (feat_ Pop Will Eat.mp3",
+          "albumArt": false
+        },
+        "Full Throttle": {
+          "name": "04 Full Throttle.mp3",
+          "title": "Full Throttle",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/04 Full Throttle.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/04 Full Throttle.mp3",
+          "albumArt": false
+        },
+        "Voodoo People": {
+          "name": "05 Voodoo People.mp3",
+          "title": "Voodoo People",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/05 Voodoo People.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/05 Voodoo People.mp3",
+          "albumArt": false
+        },
+        "Speedway (Theme From Fastlane)": {
+          "name": "06 Speedway (Theme From Fastlane).mp3",
+          "title": "Speedway (Theme From Fastlane)",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/06 Speedway (Theme From Fastlane).mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/06 Speedway (Theme From Fastlane).mp3",
+          "albumArt": false
+        },
+        "The Heat (The Energy)": {
+          "name": "07 The Heat (The Energy).mp3",
+          "title": "The Heat (The Energy)",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/07 The Heat (The Energy).mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/07 The Heat (The Energy).mp3",
+          "albumArt": false
+        },
+        "Poison": {
+          "name": "08 Poison.mp3",
+          "title": "Poison",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/08 Poison.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/08 Poison.mp3",
+          "albumArt": false
+        },
+        "No Good (Start The Dance)": {
+          "name": "09 No Good (Start The Dance).mp3",
+          "title": "No Good (Start The Dance)",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/09 No Good (Start The Dance).mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/09 No Good (Start The Dance).mp3",
+          "albumArt": false
+        },
+        "One Love (Edit)": {
+          "name": "10 One Love (Edit).mp3",
+          "title": "One Love (Edit)",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/10 One Love (Edit).mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/10 One Love (Edit).mp3",
+          "albumArt": false
+        },
+        "3 Kilos": {
+          "name": "11 3 Kilos.mp3",
+          "title": "3 Kilos",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/11 3 Kilos.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/11 3 Kilos.mp3",
+          "albumArt": false
+        },
+        "Skylined": {
+          "name": "12 Skylined.mp3",
+          "title": "Skylined",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/12 Skylined.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/12 Skylined.mp3",
+          "albumArt": false
+        },
+        "Ckaustrophobic Sting": {
+          "name": "13 Ckaustrophobic Sting.mp3",
+          "title": "Ckaustrophobic Sting",
+          "artist": "The Prodigy",
+          "album": "Music For The Jilted Generation",
+          "path": "/home/amotio/Music/The Prodigy/Music For The Jilted Generatio/13 Ckaustrophobic Sting.mp3",
+          "relPath": "../../Music/The Prodigy/Music For The Jilted Generatio/13 Ckaustrophobic Sting.mp3",
+          "albumArt": false
+        }
+      },
+      "Prodigy Presents The Dirtchamber Sessions Volume One": {
+        "Intro beats, Tonto's Release,": {
+          "name": "01 Intro beats_ Tonto's Release_.mp3",
+          "title": "Intro beats, Tonto's Release,",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/01 Intro beats_ Tonto's Release_.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/01 Intro beats_ Tonto's Release_.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "Bug Powder Dust, Grandmaster F": {
+          "name": "02 Bug Powder Dust_ Grandmaster F.mp3",
+          "title": "Bug Powder Dust, Grandmaster F",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/02 Bug Powder Dust_ Grandmaster F.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/02 Bug Powder Dust_ Grandmaster F.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "Hey Can You Relate, What Time": {
+          "name": "04 Hey Can You Relate_ What Time.mp3",
+          "title": "Hey Can You Relate, What Time",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/04 Hey Can You Relate_ What Time.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/04 Hey Can You Relate_ What Time.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "The Mexican, Rock The House, B": {
+          "name": "03 The Mexican_ Rock The House_ B.mp3",
+          "title": "The Mexican, Rock The House, B",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/03 The Mexican_ Rock The House_ B.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/03 The Mexican_ Rock The House_ B.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "The Home Of Hip Hop, Strong Is": {
+          "name": "06 The Home Of Hip Hop_ Strong Is.mp3",
+          "title": "The Home Of Hip Hop, Strong Is",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/06 The Home Of Hip Hop_ Strong Is.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/06 The Home Of Hip Hop_ Strong Is.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "New York, Punk To Funk, I'm Si": {
+          "name": "05 New York_ Punk To Funk_ I'm Si.mp3",
+          "title": "New York, Punk To Funk, I'm Si",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/05 New York_ Punk To Funk_ I'm Si.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/05 New York_ Punk To Funk_ I'm Si.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "Sure Shot, Breakdance Electric": {
+          "name": "08 Sure Shot_ Breakdance Electric.mp3",
+          "title": "Sure Shot, Breakdance Electric",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/08 Sure Shot_ Breakdance Electric.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/08 Sure Shot_ Breakdance Electric.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        },
+        "Get Down, Humpty Dance, Dope O": {
+          "name": "07 Get Down_ Humpty Dance_ Dope O.mp3",
+          "title": "Get Down, Humpty Dance, Dope O",
+          "artist": "The Prodigy",
+          "album": "Prodigy Presents The Dirtchamber Sessions Volume One",
+          "path": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/07 Get Down_ Humpty Dance_ Dope O.mp3",
+          "relPath": "../../Music/The Prodigy/Prodigy Presents The Dirtchamb/07 Get Down_ Humpty Dance_ Dope O.mp3",
+          "albumArt": "/home/amotio/Music/The Prodigy/Prodigy Presents The Dirtchamb/Folder.jpg"
+        }
+      },
+      "": {
+        "Smack My Bitch Up": {
+          "name": "01 Smack My Bitch Up.mp3",
+          "title": "Smack My Bitch Up",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/01 Smack My Bitch Up.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/01 Smack My Bitch Up.mp3",
+          "albumArt": false
+        },
+        "Funky Shit": {
+          "name": "04 Funky Shit.mp3",
+          "title": "Funky Shit",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/04 Funky Shit.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/04 Funky Shit.mp3",
+          "albumArt": false
+        },
+        "Diesel Power": {
+          "name": "03 Diesel Power.mp3",
+          "title": "Diesel Power",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/03 Diesel Power.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/03 Diesel Power.mp3",
+          "albumArt": false
+        },
+        "Serila Thrilla": {
+          "name": "05 Serila Thrilla.mp3",
+          "title": "Serila Thrilla",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/05 Serila Thrilla.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/05 Serila Thrilla.mp3",
+          "albumArt": false
+        },
+        "Breathe": {
+          "name": "02 Breathe.mp3",
+          "title": "Breathe",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/02 Breathe.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/02 Breathe.mp3",
+          "albumArt": false
+        },
+        "Firestarter": {
+          "name": "08 Firestarter.mp3",
+          "title": "Firestarter",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/08 Firestarter.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/08 Firestarter.mp3",
+          "albumArt": false
+        },
+        "Mindfields": {
+          "name": "06 Mindfields.mp3",
+          "title": "Mindfields",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/06 Mindfields.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/06 Mindfields.mp3",
+          "albumArt": false
+        },
+        "Narayan": {
+          "name": "07 Narayan.mp3",
+          "title": "Narayan",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/07 Narayan.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/07 Narayan.mp3",
+          "albumArt": false
+        },
+        "Fuel My Fire": {
+          "name": "10 Fuel My Fire.mp3",
+          "title": "Fuel My Fire",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/10 Fuel My Fire.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/10 Fuel My Fire.mp3",
+          "albumArt": false
+        },
+        "Climbatize": {
+          "name": "09 Climbatize.mp3",
+          "title": "Climbatize",
+          "artist": "The Prodigy",
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/Smack My Biitch Up/09 Climbatize.mp3",
+          "relPath": "../../Music/The Prodigy/Smack My Biitch Up/09 Climbatize.mp3",
+          "albumArt": false
+        }
+      }
+    },
+    "": {
+      "": {
+        "The Prodigy - The Day Is My Enemy.flac": {
+          "name": "The Prodigy - The Day Is My Enemy.flac",
+          "title": "The Prodigy - The Day Is My Enemy.flac",
+          "artist": [],
+          "album": "",
+          "path": "/home/amotio/Music/The Prodigy/The Day Is My Enemy (2015)/The Prodigy - The Day Is My Enemy.flac",
+          "relPath": "../../Music/The Prodigy/The Day Is My Enemy (2015)/The Prodigy - The Day Is My Enemy.flac",
+          "albumArt": false
+        }
+      }
+    }
+  }
+}

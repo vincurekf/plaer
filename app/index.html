@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title>PLÆR</title>
+	<title>PLÆR</title>	
 	<meta charset="UTF-8">
 	<!-- Mobile Specific Metas -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -91,7 +91,7 @@
 		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album)">
 			<span ng-if="player.current.artist">{{ player.current.artist }}<i class="icon  icon-right-open"></i></span>
 			<span ng-if="player.current.album">{{ player.current.album }}<i class="icon  icon-right-open"></i></span>
-			{{ player.current.title || player.current.title }}
+			{{ player.current.title || player.current.name }}
 		</div>
 		<div class="volume">
       <label>

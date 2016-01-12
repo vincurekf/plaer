@@ -18,6 +18,24 @@ playerApp.run(function($rootScope, $http) {
   };
   //
 
+  $rootScope.sortedList = {
+    data: [],
+    currentData: [],
+    currentPath: '',
+    set: function(arr){
+      console.log( arr );
+      var path = '';
+      for( var id in arr ){
+        path += id+'/'
+      }
+      console.log( path );
+    },
+    init: function(){
+      console.log(this.data);
+      this.currentData = this.data;
+    }
+  }
+
   //
   $rootScope.archive = {
     defaultDir: '../',
@@ -53,12 +71,19 @@ playerApp.run(function($rootScope, $http) {
         console.log( err );
         var cachedFolders = null;
       }
+      try{
+        $rootScope.sortedList.data = fs.readJsonSync(self.cacheDir+'/cachedSortedArtists.json', {throws: false});
+      }catch(err){
+        console.log( err );
+        $rootScope.sortedList.data = null;
+      }
       // if there is no such file, scan default folder and start app
-      if(cachedFolders === null){
+      if(cachedFolders === null || $rootScope.sortedList.data === null){
         console.log('scanning folders');
         this.scan(this.folder, function(files, artists, albums){
           // set default album to first album in array
           $rootScope.list.set.album(albums[0]);
+          $rootScope.sortedList.init();
         });
       }else{
         // use chached data and do not scan folders for files
@@ -71,6 +96,7 @@ playerApp.run(function($rootScope, $http) {
         // apply changes to scope
         console.dir($rootScope.archive.files)
         $rootScope.$apply();
+        $rootScope.sortedList.init();
         //$rootScope.list.set.album(cachedFolders.albums[0]);
       }
     },
@@ -143,6 +169,7 @@ playerApp.run(function($rootScope, $http) {
       $rootScope.loading.message = 'Scanning ...';
 
       var items = [] // files, directories, symlinks, etc
+      var sorted = {} // autor > album > song
       try{
         var foldPath = sourcePath || this.folder;
         pathstr = path.dirname(process.execPath);
@@ -163,6 +190,10 @@ playerApp.run(function($rootScope, $http) {
                 fileItem.path = item.path;
                 fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
+                if( !sorted[fileItem.artist] ) sorted[fileItem.artist] = {};
+                if( !sorted[fileItem.artist][fileItem.album] ) sorted[fileItem.artist][fileItem.album] = {};
+                sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
+                //sorted[fileItem.artist][fileItem.album].push(fileItem);
                 //console.log(fileItem);
                 items.push(fileItem);
                 $rootScope.notification.show(fileItem.title+' scanned');
@@ -176,6 +207,9 @@ playerApp.run(function($rootScope, $http) {
               if(err) console.log( err );
               console.log( value );
             });
+            // save sorted list
+            console.log( sorted );
+            $rootScope.sortedList.data = sorted;
             // remove duplicates
             items = _.uniq(items);
             console.log( items );
@@ -195,11 +229,17 @@ playerApp.run(function($rootScope, $http) {
             $rootScope.$apply();
             // archive current listed files for future startup
             setTimeout(function(){
-              console.log( $rootScope.archive.files );
               fs.outputJson(self.cacheDir+'/cachedFolders.json',{
                   files: items,
                   artists: $rootScope.archive.artists,
                   albums: $rootScope.archive.albums
+                }, function (err) {
+                if( err ) console.log(err);
+                console.log('saved');
+              });
+              console.log( sorted );
+              fs.outputJson(self.cacheDir+'/cachedSortedArtists.json',{
+                  sorted: sorted
                 }, function (err) {
                 if( err ) console.log(err);
                 console.log('saved');
@@ -685,6 +725,10 @@ playerApp.config(['$routeProvider',
     $routeProvider
     .when('/app', {
       templateUrl: 'views/list.html',
+      controller: 'ListCtrl'
+    })
+    .when('/sorted', {
+      templateUrl: 'views/sorted.html',
       controller: 'ListCtrl'
     })
     .otherwise({

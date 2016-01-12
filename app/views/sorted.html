@@ -1,0 +1,16 @@
+<div id="main-view">
+
+    <div class="tri-view left">
+      <h3>Artists</h3>
+      <ul class="list">
+        <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="sortedList.set()">
+          ALL
+        </li>
+        <li ng-repeat="item in sortedList.data | filter:searching" class="song">
+          <span ng-click="sortedList.set()">{{ sortedList.data.indexOf(item) }}</span>
+          <i ng-click="player.playlist.add('artist', artist)" class="icon icon-list-add"><span>Add to playlist</span></i>
+        </li>
+      </ul>
+    </div>
+
+</div>
