@@ -743,8 +743,10 @@ $sidepanel-width: 250px;
 			display: inline-block;
 			background: rgba(0, 0, 0, 0.05);
 			overflow: hidden;
+			background-size: cover !important;
+			box-shadow: 0 0 20px rgba(0,0,0,0.15) inset;
 			&.playing {
-			  background: rgba($main-accent-color,0.2);
+			  background: rgba($main-bg-color,0.2);
 			}
 			.title{
 				font-size: 1.2rem;
@@ -781,7 +783,7 @@ $sidepanel-width: 250px;
 				  position: absolute;
 				  bottom: 2rem;
 				  right: 2rem;
-				  background: rgba($main-accent-color, 0.4);
+				  background: rgba($main-bg-color, 0.9);
 				  width: 4rem;
 				  height: 4rem;
 				  border-radius: 2rem;
@@ -795,7 +797,7 @@ $sidepanel-width: 250px;
 					bottom: 2.5rem;
 					height: 3rem;
 					width: 3rem;
-				  background: rgba($main-accent-color, 0.2);
+				  background: rgba($main-bg-color, 0.2);
 				  border-radius: 3rem;
 				  line-height: 3rem;
 					&::before{
@@ -809,7 +811,7 @@ $sidepanel-width: 250px;
 		}
 		.song{
 			&.playing {
-			  background: rgba($main-accent-color,0.2);
+			  background: rgba($main-bg-color,0.2);
 			}
 			.title{
 				line-height: 2rem;
@@ -840,6 +842,15 @@ $sidepanel-width: 250px;
 					opacity: 1;
 				}
 			}
+		}
+	}
+}
+
+.views {
+	.icon {
+		color: $main-bg-color !important;
+		&::before{
+			color: $main-bg-color !important;
 		}
 	}
 }

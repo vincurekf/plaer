@@ -20,7 +20,7 @@
         <div
           ng-if="library.currentView === 'artist'"
           ng-repeat="(key, item) in library.current.artist.albums | filter:searching"
-          class="item {{ player.currAlbum(key) === true ? 'playing' : '' }}">
+          class="item {{ player.currAlbum(key) === true ? 'playing' : '' }}" style="background: url('{{ archive.albumArts[key] }}')">
           <span class="title" ng-click="library.set('album',item)">{{ key }}</span>
           <i ng-click="player.playlist.add('album', key)" class="icon icon-list-add"></i>
           <i ng-click="player.playlist.add('album', key);player.play()" class="icon icon-play"></i>

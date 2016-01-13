@@ -58,7 +58,7 @@
         "kiosk": false,
         "show_in_taskbar": true,
         "transparent": false,
-        "toolbar": true, 
+        "toolbar": false, 
         "icon": "./app/img/icon_64.png",
         "kiosk_emulation": false,
         "position": "center"

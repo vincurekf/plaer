@@ -1,5 +1,5 @@
 var playerApp = angular.module('playerApp', ['ngRoute','playerApp.controllers','ngOrderObjectBy']);
-playerApp.run(function($rootScope, $http) {
+playerApp.run(function($rootScope, $http, $location) {
 
   //
   var _ = require('underscore');
@@ -76,9 +76,6 @@ playerApp.run(function($rootScope, $http) {
     current: [],
     currentView: 'library',
     title: [],
-    findKey: function(array, item){
-      return _.findKey(array, item);
-    },
     set: function(type,arr){
       console.log( arr );
       var data = typeof arr === 'object' ? arr : this.data.artists[arr];
@@ -102,6 +99,55 @@ playerApp.run(function($rootScope, $http) {
   }
 
   //
+  $rootScope.list = {
+    current: [],
+    albumArt: '',
+    album: '',
+    albumInfo: [],
+    set: {
+      album: function( album ){
+        console.log( album );
+        $rootScope.list.album = album;
+        $rootScope.list.current.songs = _.where($rootScope.archive.files, { album: album });
+        $rootScope.list.albumInfo = $rootScope.list.current.songs[0];
+        $rootScope.list.albumInfo.size = _.size($rootScope.list.current.songs);
+        $rootScope.list.albumArt = _.where($rootScope.archive.files, { album: album })[0].albumArt || $rootScope.archive.albumArts[album] || false;
+        console.log( $rootScope.list.albumArt );
+        if( !$rootScope.list.albumArt || typeof $rootScope.list.albumArt === 'undefined' ){
+          console.log('Fetching Album Art for: '+album);
+          $rootScope.archive.fetchArt($rootScope.list.albumInfo, function(err, result){
+            if (err) return;
+            $rootScope.list.albumArt = result;
+            $rootScope. $apply();
+          });
+        }
+      },
+      artist:function(artist){
+        console.log( artist );
+        var songs;
+        if( artist ){
+          songs = _.where( $rootScope.archive.files, { artist: artist });
+        }else{
+          songs = $rootScope.archive.files;
+        }
+        console.log(songs)
+        var albums = _.uniq(_.pluck(songs, 'album'));
+        $rootScope.list.current = {
+          songs: songs,
+          albums: albums
+        };
+        console.log(albums)
+        $rootScope.list.album = albums[0];
+        $rootScope.list.set.album(albums[0]);
+      }
+    },
+    init: function(){
+      console.log('init list');
+      this.set.artist();
+    }
+  }
+
+  //
   $rootScope.archive = {
     defaultDir: '../',
     cacheDir: './app/cache',
@@ -111,7 +157,9 @@ playerApp.run(function($rootScope, $http) {
     files: [],
     artists: [],
     albums: [],
+    albumArts: {},
     size: 0,
+    view: '',
     artFNames: ['Cover.jpg', 'cover.jpg','front.jpg', 'Folder.jpg', 'AlbumArtLarge.jpg', 'AlbumArt.jpg', 'AlbumArtSmall.jpg'],
     init: function(folder){
       var self = this;
@@ -124,6 +172,19 @@ playerApp.run(function($rootScope, $http) {
           return
         }
         self.folder = value;
+        $rootScope.$apply();
+      });
+      // get saved scan folder
+      localforage.getItem('current_view', function(err, value) {
+        console.log( value );
+        if(value === null || err){
+          self.view = 'list';
+          $location.path('list');
+          $rootScope.$apply();
+          return
+        }
+        self.view = value;
+        $location.path(value);
         $rootScope.$apply();
       });
       console.log( self.folder );
@@ -141,6 +202,13 @@ playerApp.run(function($rootScope, $http) {
       }catch(err){
         console.log( err );
         $rootScope.library.data = null;
+      }
+      try{
+        $rootScope.archive.albumArts = fs.readJsonSync(self.cacheDir+'/cachedAlbumArts.json', {throws: false});
+        console.log( $rootScope.archive.albumArts );
+      }catch(err){
+        console.log( err );
+        $rootScope.archive.albumArts = [];
       }
       // if there is no such file, scan default folder and start app
       if(cachedFiles === null || $rootScope.library.data === null){
@@ -167,7 +235,8 @@ playerApp.run(function($rootScope, $http) {
       }
     },
     checkArt: function(item){
-      var done = false;
+      var done = false,
+          self = this;
       for( var i = 0; i < this.artFNames.length; i++ ){
         if( !done ){
           var diir = path.dirname(item.path)+'/'+this.artFNames[i];
@@ -175,6 +244,7 @@ playerApp.run(function($rootScope, $http) {
           try{
             if(fs.statSync(artPath).isFile()){
               done = true;
+              self.albumArts[item.album] = artPath;
               resultUrl = path.resolve(artPath);
             };
           }catch(err){
@@ -204,6 +274,14 @@ playerApp.run(function($rootScope, $http) {
               console.log('done');
               var relativePath = path.resolve('../', path.dirname(item.path)+'/Cover.jpg');
               console.log(relativePath);
+              self.albumArts[item.album] = relativePath;
+              fs.outputJson(self.cacheDir+'/cachedAlbumArts.json', self.albumArts, function (err) {
+                if( err ) console.log(err);
+                console.log( self.albumArts );
+                console.log('album art for '+item.album+' saved');
+                $rootScope.notification.show('Album arts cache saved.');
+                $rootScope.$apply();
+              });
               cb(null,relativePath);
             });
           }else{
@@ -230,12 +308,19 @@ playerApp.run(function($rootScope, $http) {
         //$rootScope.list.set.album(albums[0]);
       });
     },
+    setView: function(view){
+      // save view to storage
+      $location.path(view);
+      localforage.setItem('current_view', view, function(err, value) {
+        if(err) console.log( err );
+      });
+    },
     scan: function(sourcePath, cb){
       var self = this;
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Scanning ...';
 
-      var items = [] // files, directories, symlinks, etc
+      $rootScope.archive.files = [] // files, directories, symlinks, etc
       var sorted = {} // autor > album > song
       var artists = [] // all artists
       var albums = [] // all albums
@@ -280,7 +365,7 @@ playerApp.run(function($rootScope, $http) {
                      $rootScope.library.data.artists[fileItem.artist].albums[fileItem.album].songs[fileItem.title] = fileItem;
                 //sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
                 //
-                items.push(fileItem);
+                $rootScope.archive.files.push(fileItem);
                 $rootScope.notification.show(fileItem.title+' scanned');
                 $rootScope.$apply();
                 fileId++
@@ -297,12 +382,12 @@ playerApp.run(function($rootScope, $http) {
             // save sorted list
             console.dir( $rootScope.library.data );
             // remove duplicates
-            items = _.uniq(items);
-            console.dir( 'items', items );
+            $rootScope.archive.files = _.uniq($rootScope.archive.files);
+            console.dir( '$rootScope.archive.files', $rootScope.archive.files );
             // assign folders
-            $rootScope.archive.files = _.sortBy(items, 'path');
+            $rootScope.archive.files = _.sortBy($rootScope.archive.files, 'path');
             // total ammount of songs
-            $rootScope.archive.size = _.size(items);
+            $rootScope.archive.size = _.size($rootScope.archive.files);
             // pick artist names
             $rootScope.archive.artists = artists;;
             // pick album names
@@ -344,54 +429,6 @@ playerApp.run(function($rootScope, $http) {
   console.log( defaultFolder );
   $rootScope.archive.init(defaultFolder);
   //
-
-  //
-  $rootScope.list = {
-    current: [],
-    albumArt: '',
-    album: '',
-    albumInfo: [],
-    set: {
-      album: function( album ){
-        console.log( album );
-        $rootScope.list.album = album;
-        $rootScope.list.current.songs = _.where($rootScope.archive.files, { album: album });
-        $rootScope.list.albumInfo = $rootScope.list.current.songs[0];
-        $rootScope.list.albumInfo.size = _.size($rootScope.list.current.songs);
-        $rootScope.list.albumArt = _.where($rootScope.archive.files, { album: album })[0].albumArt;
-        if( !$rootScope.list.albumArt ){
-          console.log('Fetching Album Art for: '+album);
-          $rootScope.archive.fetchArt($rootScope.list.albumInfo, function(err, result){
-            if (err) return;
-            $rootScope.list.albumArt = result;
-            $rootScope. $apply();
-          });
-        }
-      },
-      artist:function(artist){
-        console.log( artist );
-        var songs;
-        if( artist ){
-          songs = _.where( $rootScope.archive.files, { artist: artist });
-        }else{
-          songs = $rootScope.archive.files;
-        }
-        console.log(songs)
-        var albums = _.uniq(_.pluck(songs, 'album'));
-        $rootScope.list.current = {
-          songs: songs,
-          albums: albums
-        };
-        console.log(albums)
-        $rootScope.list.album = albums[0];
-        $rootScope.list.set.album(albums[0]);
-      }
-    },
-    init: function(){
-      console.log('init list');
-      //this.set.artist();
-    }
-  }
 
   $rootScope.notification = {
     text: '',

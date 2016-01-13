@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="./ionicons/css/ionicons.min.css">
 	<link rel="stylesheet" type="text/css" href="./icons/css/animation.css" />
 	<link rel="stylesheet" type="text/css" href="./icons/css/plaer.css" />
-	<link rel="stylesheet" type="text/css" href="./css/app.css" />
+	<link rel="stylesheet" type="text/css" href="./css/app.min.css" />
 	</head>
 
 <body ng-app="playerApp" ng-controller="AppCtrl">
@@ -55,8 +55,8 @@
 		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
 		<h3>View</h3>
 		<div class="views">
-			<a href="#/library"><img src="./app/img/grid.png"></a>
-			<a href="#/list"><img src="./app/img/trilist.png"></a>
+			<i ng-click="archive.setView('list')" class="icon icon-th-list-1"></i>
+			<i ng-click="archive.setView('library')" class="icon icon-th"></i>
 		</div>
 		<h3>Source</h3>
 		Current: <span class="source">{{ archive.folder }}</span><br>
@@ -131,6 +131,6 @@
 	<script src="./js/window.js"></script>
 	<script src="./js/controllers.js"></script>
 	<script src="./js/app.js"></script>
-	
+
 </body>
 </html>

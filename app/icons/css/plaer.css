@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'plaer';
-  src: url('../font/plaer.eot?82426890');
-  src: url('../font/plaer.eot?82426890#iefix') format('embedded-opentype'),
-       url('../font/plaer.woff?82426890') format('woff'),
-       url('../font/plaer.ttf?82426890') format('truetype'),
-       url('../font/plaer.svg?82426890#plaer') format('svg');
+  src: url('../font/plaer.eot?93666091');
+  src: url('../font/plaer.eot?93666091#iefix') format('embedded-opentype'),
+       url('../font/plaer.woff?93666091') format('woff'),
+       url('../font/plaer.ttf?93666091') format('truetype'),
+       url('../font/plaer.svg?93666091#plaer') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'plaer';
-    src: url('../font/plaer.svg?82426890#plaer') format('svg');
+    src: url('../font/plaer.svg?93666091#plaer') format('svg');
   }
 }
 */
@@ -102,3 +102,5 @@
 .icon-trash:before { content: '\e82d'; } /* '' */
 .icon-right-open:before { content: '\e82e'; } /* '' */
 .icon-left-open:before { content: '\e82f'; } /* '' */
+.icon-th-list-1:before { content: '\e830'; } /* '' */
+.icon-th:before { content: '\e831'; } /* '' */
