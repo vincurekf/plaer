@@ -345,7 +345,7 @@ playerApp.run(function($rootScope, $http, $location) {
                 fileItem.artist = metadata.artist[0] || metadata.artist;
                 fileItem.album = metadata.album;
                 fileItem.path = item.path;
-                fileItem.path = path.relative(pathstr, item.path);
+                fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
                 // assign artist and album to array
                 if( !_.contains(albums, fileItem.album) && !_.isEmpty(fileItem.album) ) albums.push(fileItem.album);
@@ -455,6 +455,7 @@ playerApp.run(function($rootScope, $http, $location) {
     random: false,
     loop: false,
     fromPlaylist: true,
+    stopped: false,
     init: function(){
       var self = this;
       var postevak = document.getElementById('postevak');
@@ -505,6 +506,7 @@ playerApp.run(function($rootScope, $http, $location) {
           file = file || self.current || self.playlist.list[0] || null;
       if( self.playing ){
         self.stop();
+        self.stopped = false;
       };
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
@@ -518,7 +520,7 @@ playerApp.run(function($rootScope, $http, $location) {
         }else{
           // load and play audio
           self.current = file;
-          console.log('Relative path: '+file.path);
+          console.log('Path: '+file.path);
           var fileBuff = fs.readFileSync(file.path);
           self.audio = AV.Player.fromBuffer(fileBuff);
           self.audio.on('ready', function(){
@@ -535,7 +537,9 @@ playerApp.run(function($rootScope, $http, $location) {
           });
 
           self.audio.on('end', function(){
-            $rootScope.player.onend();
+            if( !self.stopped ){
+              $rootScope.player.onend();
+            }  
           });
 
           setTimeout(function(){
@@ -655,6 +659,7 @@ playerApp.run(function($rootScope, $http, $location) {
       this.audio = null;
       this.playing = false;
       this.paused = false;
+      this.stopped = true;
       this.position.stopWatch();
       this.position.current = '00:00';
       this.position.percentage = 0;

@@ -21,12 +21,11 @@
     ], 
     "inject-js-end": "", 
     "node-remote": "", 
-    "node-main": "", 
     "dependencies": {
-        "nw-notify": "", 
+        "fs-extra": "^0.26.4", 
         "getdirs": "", 
         "request": "", 
-        "fs-extra": "^0.26.4", 
+        "nw-notify": "", 
         "underscore": "", 
         "musicmetadata": ""
     }, 
@@ -37,9 +36,9 @@
     }, 
     "js-flags": "", 
     "app_name": "plaer", 
-    "single-instance": false, 
     "name": "PLAER", 
     "user-agent": "", 
+    "single-instance": false, 
     "window": {
         "show": false, 
         "always-on-top": false, 
@@ -72,5 +71,6 @@
     ], 
     "inject-js-start": "", 
     "main": "./app/index.html", 
-    "chromium-args": ""
+    "chromium-args": "", 
+    "node-main": ""
 }
