@@ -23,7 +23,7 @@ Basic features that should have every audio player.
 Build on nw.js (on v0.12.3, linux 64bit tested and working) with Java Script, HTML + CSS.
 
 ## Installation
-If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/tree/v0.0.1-alpha).
+If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/releases).
 
 ## Usage
 - Click on the gear  icon, options panel pops up.
