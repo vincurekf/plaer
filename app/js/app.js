@@ -31,17 +31,15 @@ playerApp.run(function($rootScope, $http) {
       return _.findKey(array, item);
     },
     set: function(type,arr){
-      var data = typeof arr === 'object' ? arr : this.data[arr];
+      console.log( arr );
+      var data = typeof arr === 'object' ? arr : this.data.artists[arr];
       console.log( this.currentView );
       this.current[type] = data;
       this.currentView = type;
-      if( type === 'album' ){
-        this.currentTitle = this.findKey(this.data[this.title.artist],data);
-      }else{
-        this.currentTitle = this.findKey(this.data,data);
+      if( type === 'artist' ){
         this.title.album = null;
       }
-      this.title[type] = this.currentTitle;
+      this.title[type] = arr.name || arr;
       console.log(this.title[type]);
     },
     reset: function(){
@@ -216,12 +214,21 @@ playerApp.run(function($rootScope, $http) {
                 fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
                 // assign artist and album to array
-                if( !_.contains(albums, fileItem.album) && fileItem.album !== [] ) albums.push(fileItem.album);
-                if( !_.contains(artists, fileItem.artist) && fileItem.artist !== [] ) artists.push(fileItem.artist);
+                if( !_.contains(albums, fileItem.album) && !_.isEmpty(fileItem.album) ) albums.push(fileItem.album);
+                if( !_.contains(artists, fileItem.artist) && !_.isEmpty(fileItem.artist) ) artists.push(fileItem.artist);
                 // assign to artist > album > file
-                if( !$rootScope.library.data[fileItem.artist] ) $rootScope.library.data[fileItem.artist] = {};
-                if( !$rootScope.library.data[fileItem.artist][fileItem.album] ) $rootScope.library.data[fileItem.artist][fileItem.album] = {};
-                $rootScope.library.data[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
+                if( !$rootScope.library.data.artists ) $rootScope.library.data.artists = {};
+                if( !$rootScope.library.data.artists[fileItem.artist] ) $rootScope.library.data.artists[fileItem.artist] = {
+                  name: fileItem.artist,
+                  albums: {}
+                };
+                //if( !$rootScope.library.data.artists[fileItem.artist].albums ) $rootScope.library.data.artists[fileItem.artist].albums = {};
+                if( !$rootScope.library.data.artists[fileItem.artist].albums[fileItem.album] ) $rootScope.library.data.artists[fileItem.artist].albums[fileItem.album] = {
+                  name: fileItem.album,
+                  songs: {}
+                };
+                //if( !$rootScope.library.data.artists[fileItem.artist].albums[fileItem.album].songs ) $rootScope.library.data.artists[fileItem.artist].albums[fileItem.album].songs = {};
+                     $rootScope.library.data.artists[fileItem.artist].albums[fileItem.album].songs[fileItem.title] = fileItem;
                 //sorted[fileItem.artist][fileItem.album][fileItem.title] = fileItem;
                 //
                 items.push(fileItem);
