@@ -16,6 +16,8 @@
 
 <body ng-app="playerApp" ng-controller="AppCtrl">
 
+	<div style="visibility: hidden;" ng-joy-ride="startJoyRide" config="config" on-finish="onFinish()" on-skip="onFinish()"></div>
+
 	<div class="notification {{ notification.text !== '' ? 'visible' : ''}}">{{ notification.text }}</div>
 
 	<div id="loading" class="{{ loading.active === true ? 'active' : ''}}">

@@ -345,7 +345,7 @@ playerApp.run(function($rootScope, $http, $location) {
                 fileItem.artist = metadata.artist[0] || metadata.artist;
                 fileItem.album = metadata.album;
                 fileItem.path = item.path;
-                fileItem.relPath = path.relative(pathstr, item.path);
+                fileItem.path = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
                 // assign artist and album to array
                 if( !_.contains(albums, fileItem.album) && !_.isEmpty(fileItem.album) ) albums.push(fileItem.album);
@@ -509,7 +509,7 @@ playerApp.run(function($rootScope, $http, $location) {
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
       console.log( file );
-      fs.exists(file.relPath, function (exists) {
+      fs.exists(file.path, function (exists) {
         console.log(exists);
         if( !exists ){
           alert('file does not exist');
@@ -518,8 +518,8 @@ playerApp.run(function($rootScope, $http, $location) {
         }else{
           // load and play audio
           self.current = file;
-          console.log('Relative path: '+file.relPath);
-          var fileBuff = fs.readFileSync(file.relPath);
+          console.log('Relative path: '+file.path);
+          var fileBuff = fs.readFileSync(file.path);
           self.audio = AV.Player.fromBuffer(fileBuff);
           self.audio.on('ready', function(){
             self.playing = true;
@@ -695,7 +695,7 @@ playerApp.run(function($rootScope, $http, $location) {
           this.play( newFile );
         }
       }else{
-        if( file && (file.relPath !== this.current.relPath) ){
+        if( file && (file.path !== this.current.path) ){
           this.stop();
           setTimeout( function(){
             self.play(file);
@@ -709,7 +709,7 @@ playerApp.run(function($rootScope, $http, $location) {
     songState: function(file){
       if( file && this.current ){
         if( this.playing ){
-          return file.relPath === this.current.relPath;
+          return file.path === this.current.path;
         }
       }
       return false
