@@ -20,12 +20,16 @@ Basic features that should have every audio player.
   - ctrl+f: search
   - ctrl+r: random on/off
 
-Nothing more and nothing less.
-
-Build on nw.js (on v0.12.3, linux 64bit tested and working), so it is just Java Script and HTML + CSS.
+Build on nw.js (on v0.12.3, linux 64bit tested and working) with Java Script, HTML + CSS.
 
 ## Installation
-If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/tree/v0.0.1-alpha). 
+If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/tree/v0.0.1-alpha).
+
+## Usage
+- Click on the gear  icon, options panel pops up.
+- Under Source type the path you want to scan.
+- After scanning, you'll see all artist and albums as shown in screenshot.
+- And now just enjoy the music!
 
 ## Building
 To use build your own version you need to have nodejs and npm installed. How to install nodejs (and npm) see [nodejs.org](https://nodejs.org/en/).
@@ -41,8 +45,21 @@ When you have nodejs (and npm) installed and working:
 
 [Web2Executable](https://github.com/jyapayne/Web2Executable) - Excellent tool for building executable files (only problem is that now compressed version of Plaer can't access audio files - the folder will be scanned, but audio wont load :/ )
 
-## Known flaws
-When loading large files (~200mb) the app may become unresponsive or laggy.
+## Change log
+
+####v0.0.2
+- grid view
+- plays FLAC files
+- folder list when selecting scan path
+- change audio library to Aurora.js
+
+####v0.0.1
+- plays mp3
+- standard features (play/pause/stop, next/previous)
+- play list
+- change volume
+- fetch album arts
+- buzz audio library
 
 ## Used libraries
 (TODO)

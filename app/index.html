@@ -16,6 +16,8 @@
 
 <body ng-app="playerApp" ng-controller="AppCtrl">
 
+	<div style="visibility: hidden;" ng-joy-ride="startJoyRide" config="config" on-finish="onFinish()" on-skip="onFinish()"></div>
+
 	<div class="notification {{ notification.text !== '' ? 'visible' : ''}}">{{ notification.text }}</div>
 
 	<div id="loading" class="{{ loading.active === true ? 'active' : ''}}">
@@ -36,6 +38,7 @@
 			<span class="message">{{ loading.message }}</span>
 		</div>
 	</div>
+
 	<div id="top-titlebar" class="top-titlebar">
 		<span class="logo-icon"><img src="./img/icon_64.png"></span>
 		<span class="title">PLÆR</span>
@@ -49,14 +52,27 @@
 			<input id="search" type="text" placeholder="Search" ng-model="searching">
 		</div>
 	</div>
-	<div class="overtop">
-	</div>
 
 	<div id="sidepanel" class="left {{ player.settings.visible === true ? 'visible' : '' }}">
 		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
+		<h3>View</h3>
+		<div class="views">
+			<i ng-click="archive.setView('list')" class="icon icon-th-list-1"></i>
+			<i ng-click="archive.setView('library')" class="icon icon-th"></i>
+		</div>
 		<h3>Source</h3>
 		Current: <span class="source">{{ archive.folder }}</span><br>
-		Set new: <input ng-model="archive.newFolder" placeholder="New scan path">
+		<label>
+			<span>Set new:</span> <input ng-model="archive.newFolder" placeholder="New scan path" ng-change="folderSuggestions.fetch(archive.newFolder)">
+		</label>
+		<div class="folderSuggestions" ng-if="folderSuggestions.visible">
+			<div class="message">{{ folderSuggestions.message }}</div>
+			<ul ng-if="folderSuggestions.data">
+				<li ng-repeat="suggestion in folderSuggestions.data" ng-click="folderSuggestions.appendPath(suggestion)" class="folder">
+					{{ suggestion }}
+				</li>
+			</ul>
+		</div>
 		<button ng-click="archive.setPath()" class="set-path">Scan path</button>
 	</div>
 
@@ -88,10 +104,10 @@
 		<i ng-click="player.next(player.current)" class="icon icon-right-open-big"></i>
 		<i ng-click="player.random = !player.random" class="icon icon-shuffle {{ player.random === true ? 'true' : '' }}"></i>
 		<i ng-click="player.loop = !player.loop" class="icon icon-loop {{ player.loop === true ? 'true' : '' }}"></i>
-		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album)">
+		<div class="info" ng-click="list.set.artist(player.current.artist);list.set.album(player.current.album);library.set('artist',player.current.artist);">
 			<span ng-if="player.current.artist">{{ player.current.artist }}<i class="icon  icon-right-open"></i></span>
 			<span ng-if="player.current.album">{{ player.current.album }}<i class="icon  icon-right-open"></i></span>
-			{{ player.current.title || player.current.title }}
+			{{ player.current.title || player.current.name }}
 		</div>
 		<div class="volume">
       <label>
@@ -111,6 +127,7 @@
 	<script src="./js/aurora/flac.js"></script>
 	<!-- angular library -->
 	<script src="./js/angular/angular.min.js"></script>
+	<script src="./js/angular/ng-order-object-by.js"></script>
 	<script src="./js/angular/angular-route.min.js"></script>
 	<!-- app scripts -->
 	<script src="./js/window.js"></script>

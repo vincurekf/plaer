@@ -1,0 +1,41 @@
+<div id="main-view">
+
+    <div class="library">
+
+      <h3>
+        <span ng-click="library.reset()">Library</span>
+        <span ng-if="library.title.artist" ng-click="library.set('artist', library.title.artist)"><i class="icon icon-right-open"></i>{{ library.title.artist }}</span>
+        <span ng-if="library.title.album"><i class="icon icon-right-open"></i>{{ library.title.album }}</span>
+      </h3>
+      <div class="container">
+        <div
+          ng-if="library.currentView === 'library'"
+          ng-repeat="(key, item) in library.data.artists | filter:searching"
+          class="item {{ player.currArtist(key) === true ? 'playing' : '' }}">
+          <span class="title" ng-click="library.set('artist',item)">{{ key }}</span>
+          <i ng-click="player.playlist.add('artist', key)" class="icon icon-list-add"></i>
+          <i ng-click="player.playlist.add('artist', key);player.play()" class="icon icon-play"></i>
+        </div>
+
+        <div
+          ng-if="library.currentView === 'artist'"
+          ng-repeat="(key, item) in library.current.artist.albums | filter:searching"
+          class="item {{ player.currAlbum(key) === true ? 'playing' : '' }}" style="background: url('{{ archive.albumArts[key] }}')">
+          <span class="title" ng-click="library.set('album',item)">{{ key }}</span>
+          <i ng-click="player.playlist.add('album', key)" class="icon icon-list-add"></i>
+          <i ng-click="player.playlist.add('album', key);player.play()" class="icon icon-play"></i>
+        </div>
+
+        <div
+          ng-if="library.currentView === 'album'"
+          ng-repeat="item in library.current.album.songs | orderObjectBy:'path'"
+          class="song {{ player.songState(item) === true ? 'playing' : '' }}">
+          <span class="title" ng-click="player.play(item)">{{ item.title }}</span>
+          <i ng-click="player.playlist.add('', item)" class="icon icon-list-add"></i>
+          <i ng-click="player.toggle(item)" class="icon icon-{{ player.songState(song) === true ? 'stop' : 'play' }}"></i>
+        </div>
+        </ul>
+      </div>
+    </div>
+
+</div>

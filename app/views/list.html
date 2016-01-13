@@ -6,9 +6,9 @@
         <li class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}" ng-click="list.set.artist()">
           ALL
         </li>
-        <li ng-repeat="artist in archive.artists | filter:searching" class="song {{ player.currArtist(artist) === true ? 'playing' : '' }}">
-          <span ng-click="list.set.artist(artist)">{{ artist !== '' ? artist : 'unknown' }}</span>
-          <i ng-click="player.playlist.add('artist', artist)" class="icon icon-list-add"><span>Add to playlist</span></i>
+        <li ng-repeat="artist in library.data.artists | filter:searching" class="song {{ player.currArtist(artist.name) === true ? 'playing' : '' }}">
+          <span ng-click="list.set.artist(artist.name)">{{ artist.name !== '' ? artist.name : 'unknown' }}</span>
+          <i ng-click="player.playlist.add('artist', artist.name)" class="icon icon-list-add"><span>Add to playlist</span></i>
         </li>
       </ul>
     </div>
