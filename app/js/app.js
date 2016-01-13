@@ -1,4 +1,4 @@
-var playerApp = angular.module('playerApp', ['ngRoute','playerApp.controllers']);
+var playerApp = angular.module('playerApp', ['ngRoute','playerApp.controllers','ngOrderObjectBy']);
 playerApp.run(function($rootScope, $http) {
 
   //
@@ -18,9 +18,58 @@ playerApp.run(function($rootScope, $http) {
   };
   //
 
-  $rootScope.findKey = function(array,item){
-    return _.findKey(array, item);
-  };
+  $rootScope.folderSuggestions = {
+    data: false,
+    visible: false,
+    message: null,
+    appendPath: function(appending){
+      $rootScope.archive.newFolder = path.resolve($rootScope.archive.newFolder,appending);
+      this.fetch($rootScope.archive.newFolder);
+    },
+    timeout: null,
+    fetch: function(newPath){
+      var self = this;
+      if( this.timeout ){
+        clearTimeout(this.timeout);
+      }
+      this.timeout = setTimeout(function(){
+        var pathstr = path.dirname(process.execPath);
+        var foldPath = path.resolve(pathstr, newPath);
+        //console.log(foldPath);
+        try{
+          var exist = fs.accessSync(foldPath);
+        }catch(err){
+          var exist = false;
+        }
+        if( exist !== false ){
+          console.log(foldPath);
+          self.visible = true;
+          self.message = null;
+
+          fs.readdir(foldPath, function(err,files){
+            //console.log(files);
+            var folders = [];
+            _.each(files, function(value,id){
+              if( value.charAt(0) !== "." ){
+                //console.log( path.resolve(foldPath,value) );
+                if( fs.lstatSync(path.resolve(foldPath,value)).isDirectory() ){
+                  folders.push(value);
+                }
+              }
+            });
+            console.log( folders );
+            self.data = folders;
+            $rootScope.$apply();
+          });
+        }else{
+          self.data = false;
+          self.visible = true;
+          self.message = foldPath+" does not exist"
+        }
+        $rootScope.$apply();
+      },250);
+    }
+  }
 
   $rootScope.library = {
     data: [],
@@ -240,9 +289,10 @@ playerApp.run(function($rootScope, $http) {
           }).on('end', function () {
             // save path to storage
             localforage.setItem('scan_folder', foldPath, function(err, value) {
-              console.log( value );
               if(err) console.log( err );
               console.log( value );
+              $rootScope.archive.folder = foldPath;
+              $rootScope.$apply();
             });
             // save sorted list
             console.dir( $rootScope.library.data );
@@ -264,7 +314,7 @@ playerApp.run(function($rootScope, $http) {
             // archive current listed files for future startup
             setTimeout(function(){
               fs.outputJson(self.cacheDir+'/cachedFiles.json',{
-                  files: items,
+                  files: $rootScope.archive.files,
                   artists: $rootScope.archive.artists,
                   albums: $rootScope.archive.albums
                 }, function (err) {
@@ -380,7 +430,6 @@ playerApp.run(function($rootScope, $http) {
       behindH.on("panleft panright tap", function(ev) {
         self.position.seek(ev.center.x);
       });
-
       // try to load saved playlist
       try{
         this.playlist.list = fs.readJsonSync(self.cacheDir+'/cachedPlaylist.json', {throws: false});
@@ -400,7 +449,10 @@ playerApp.run(function($rootScope, $http) {
         $rootScope.$apply();
       });
       self.bindKeys();
-
+      nwNotify.setConfig({
+        appIcon: path.resolve('./app/img/icon_64.png'),
+        displayTime: 5000
+      });
     },
     currArtist: function(artist){
       return this.current ? (this.current.artist === artist) : false;
@@ -420,7 +472,7 @@ playerApp.run(function($rootScope, $http) {
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
       console.log( file );
-      fs.exists(file.path, function (exists) {
+      fs.exists(file.relPath, function (exists) {
         console.log(exists);
         if( !exists ){
           alert('file does not exist');
@@ -428,16 +480,19 @@ playerApp.run(function($rootScope, $http) {
           return false
         }else{
           // load and play audio
-          self.playing = true;
           self.current = file;
-          var fileBuff = fs.readFileSync(file.path);
+          console.log('Relative path: '+file.relPath);
+          var fileBuff = fs.readFileSync(file.relPath);
           self.audio = AV.Player.fromBuffer(fileBuff);
           self.audio.on('ready', function(){
+            self.playing = true;
             console.log( 'ready' );
             $rootScope.loading.active = false;
             console.log( self.audio.duration );
             $rootScope.player.duration = Math.floor(self.audio.duration);
             console.log(self.duration);
+            // show notification
+            nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album);
             $rootScope.$apply();
             $rootScope.player.position.watch();
           });
@@ -446,15 +501,17 @@ playerApp.run(function($rootScope, $http) {
             $rootScope.player.onend();
           });
 
+          setTimeout(function(){
+            if( !self.playing ){
+              self.next(file);
+              nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>Couldn\'t be loaded. Playing next in list.');
+              $rootScope.$apply();
+            }
+          },5000);
+
           // play audio
           self.audio.play();
           self.audio.volume = self.volume.value;
-          // show notification
-          nwNotify.setConfig({
-            appIcon: path.resolve('./app/img/icon_64.png'),
-            displayTime: 5000
-          });
-          nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album);
         }
       });
     },
@@ -530,7 +587,9 @@ playerApp.run(function($rootScope, $http) {
       }
       var list = !_.isEmpty(this.playlist.list) ? this.playlist.list : $rootScope.archive.files;
       console.log( list );
-      var id = _.findIndex( list, current);
+      console.log( current );
+      console.log( current.id );
+      var id = _.findIndex( list, angular.copy(current) );
       var random = this.getRandom(list.length,0);
       var newId = this.random ? random : id+1;
       console.log( id, this.random, random, newId );
@@ -752,7 +811,6 @@ playerApp.run(function($rootScope, $http) {
     }
   };
   $rootScope.player.init();
-
 });
 
 // just some routes to show some content

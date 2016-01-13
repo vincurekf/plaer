@@ -36,6 +36,7 @@
 			<span class="message">{{ loading.message }}</span>
 		</div>
 	</div>
+
 	<div id="top-titlebar" class="top-titlebar">
 		<span class="logo-icon"><img src="./img/icon_64.png"></span>
 		<span class="title">PLÆR</span>
@@ -49,14 +50,27 @@
 			<input id="search" type="text" placeholder="Search" ng-model="searching">
 		</div>
 	</div>
-	<div class="overtop">
-	</div>
 
 	<div id="sidepanel" class="left {{ player.settings.visible === true ? 'visible' : '' }}">
 		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
+		<h3>View</h3>
+		<div class="views">
+			<a href="#/library"><img src="./app/img/grid.png"></a>
+			<a href="#/list"><img src="./app/img/trilist.png"></a>
+		</div>
 		<h3>Source</h3>
 		Current: <span class="source">{{ archive.folder }}</span><br>
-		Set new: <input ng-model="archive.newFolder" placeholder="New scan path">
+		<label>
+			<span>Set new:</span> <input ng-model="archive.newFolder" placeholder="New scan path" ng-change="folderSuggestions.fetch(archive.newFolder)">
+		</label>
+		<div class="folderSuggestions" ng-if="folderSuggestions.visible">
+			<div class="message">{{ folderSuggestions.message }}</div>
+			<ul ng-if="folderSuggestions.data">
+				<li ng-repeat="suggestion in folderSuggestions.data" ng-click="folderSuggestions.appendPath(suggestion)" class="folder">
+					{{ suggestion }}
+				</li>
+			</ul>
+		</div>
 		<button ng-click="archive.setPath()" class="set-path">Scan path</button>
 	</div>
 
@@ -111,11 +125,12 @@
 	<script src="./js/aurora/flac.js"></script>
 	<!-- angular library -->
 	<script src="./js/angular/angular.min.js"></script>
+	<script src="./js/angular/ng-order-object-by.js"></script>
 	<script src="./js/angular/angular-route.min.js"></script>
 	<!-- app scripts -->
 	<script src="./js/window.js"></script>
 	<script src="./js/controllers.js"></script>
 	<script src="./js/app.js"></script>
-
+	
 </body>
 </html>

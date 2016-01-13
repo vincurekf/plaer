@@ -528,6 +528,29 @@ body {
   visibility: visible;
 }
 
+.folderSuggestions {
+  max-height: 30%;
+  overflow: auto;
+}
+
+.folderSuggestions .message {
+  font-size: 0.8rem;
+  color: #c34;
+}
+
+.folderSuggestions ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.folderSuggestions ul .folder {
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  margin: 0.2rem 0px;
+  background: rgba(0, 6, 5, 0.1);
+}
+
 #loading {
   position: fixed;
   top: 3rem;

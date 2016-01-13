@@ -478,6 +478,26 @@ $sidepanel-width: 250px;
 	}
 }
 
+.folderSuggestions{
+	max-height: 30%;
+  overflow: auto;
+	.message{
+		font-size: 0.8rem;
+		color: #c34;
+	}
+	ul{
+		padding: 0;
+		margin: 0;
+		list-style: none;
+		.folder{
+			font-size: 0.8rem;
+			padding: 0.2rem 0.5rem;
+			margin: 0.2rem 0px;
+			background: rgba($main-bg-color, 0.1);
+		}
+	}
+}
+
 #loading{
 	position: fixed;
   top: $title-height;
