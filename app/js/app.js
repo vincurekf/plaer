@@ -506,7 +506,6 @@ playerApp.run(function($rootScope, $http, $location) {
           file = file || self.current || self.playlist.list[0] || null;
       if( self.playing ){
         self.stop();
-        self.stopped = false;
       };
       $rootScope.loading.active = true;
       $rootScope.loading.message = 'Loading ...';
@@ -524,6 +523,7 @@ playerApp.run(function($rootScope, $http, $location) {
           var fileBuff = fs.readFileSync(file.path);
           self.audio = AV.Player.fromBuffer(fileBuff);
           self.audio.on('ready', function(){
+            self.stopped = false;
             self.playing = true;
             console.log( 'ready' );
             $rootScope.loading.active = false;
@@ -537,9 +537,16 @@ playerApp.run(function($rootScope, $http, $location) {
           });
 
           self.audio.on('end', function(){
+            console.log( self.stopped );
             if( !self.stopped ){
               $rootScope.player.onend();
-            }  
+            }
+          });
+          self.audio.on('error', function(){
+            console.log( self.stopped );
+            if( !self.stopped ){
+              $rootScope.player.onend();
+            }
           });
 
           setTimeout(function(){
@@ -636,6 +643,7 @@ playerApp.run(function($rootScope, $http, $location) {
       console.log( id, this.random, random, newId );
       var newFile = list[newId];
       if( newFile ){
+        self.stopped = false;
         this.play(newFile);
         if( !_.isEmpty(this.playlist) ){
           this.playlist.remove(current);
@@ -651,6 +659,7 @@ playerApp.run(function($rootScope, $http, $location) {
       this.stop();
       var newFile = $rootScope.archive.files[newId];
       if( newFile ){
+        self.stopped = false;
         this.play(newFile);
       }
     },

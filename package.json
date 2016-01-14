@@ -1,15 +1,15 @@
 {
     "webexe_settings": {
-        "linux-x32": true, 
-        "export_dir": "/home/amotio/BUILDS", 
-        "windows-x64": true, 
+        "linux-x32": false, 
+        "export_dir": "/home/vincurekf/BUILDS", 
+        "windows-x64": false, 
         "uncompressed_folder": false, 
-        "download_dir": "/home/amotio/Documents/Web2ExeLinux/files/downloads", 
+        "download_dir": "/home/vincurekf/Documents/Web2ExeLinux/files/downloads", 
         "nw_compression_level": 9, 
-        "mac-x32": true, 
+        "mac-x32": false, 
         "custom_script": "", 
-        "windows-x32": true, 
-        "mac-x64": true, 
+        "windows-x32": false, 
+        "mac-x64": false, 
         "nw_version": "0.12.3", 
         "force_download": false, 
         "linux-x64": true
@@ -21,11 +21,12 @@
     ], 
     "inject-js-end": "", 
     "node-remote": "", 
+    "node-main": "", 
     "dependencies": {
-        "fs-extra": "^0.26.4", 
+        "nw-notify": "", 
         "getdirs": "", 
         "request": "", 
-        "nw-notify": "", 
+        "fs-extra": "^0.26.4", 
         "underscore": "", 
         "musicmetadata": ""
     }, 
@@ -36,9 +37,9 @@
     }, 
     "js-flags": "", 
     "app_name": "plaer", 
+    "single-instance": false, 
     "name": "PLAER", 
     "user-agent": "", 
-    "single-instance": false, 
     "window": {
         "show": false, 
         "always-on-top": false, 
@@ -71,6 +72,5 @@
     ], 
     "inject-js-start": "", 
     "main": "./app/index.html", 
-    "chromium-args": "", 
-    "node-main": ""
+    "chromium-args": ""
 }
