@@ -1,5 +1,5 @@
 var playerApp = angular.module('playerApp', ['ngRoute','playerApp.controllers','ngOrderObjectBy']);
-playerApp.run(function($rootScope, $http, $location) {
+playerApp.run(function($rootScope, $http, $location, $route) {
 
   //
   var _ = require('underscore');
@@ -8,18 +8,19 @@ playerApp.run(function($rootScope, $http, $location) {
   var lockr = require('lockr');
   var getdirs = require('getdirs');
   var request = require('request');
-  //var nwNotify = require('nw-notify');
   var mm = require('musicmetadata');
+  //
+  var { remote } = require('electron');
   //
   var winWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
   //
-  var defaultFolder = '/home/amotio/git';
+  var defaultFolder = '../';
   $rootScope.loading = {
     active: true
   };
+  
   //
-
   $rootScope.folderSuggestions = {
     data: false,
     visible: false,
@@ -73,10 +74,11 @@ playerApp.run(function($rootScope, $http, $location) {
     }
   }
 
+  //
   $rootScope.library = {
     data: [],
     current: [],
-    currentView: 'library',
+    currentView: 'list',
     title: [],
     set: function(type,arr){
       console.log( arr );
@@ -92,7 +94,7 @@ playerApp.run(function($rootScope, $http, $location) {
     },
     reset: function(){
       this.current = [];
-      this.currentView = 'library';
+      this.currentView = 'list';
       this.title = [];
     },
     init: function(){
@@ -124,11 +126,12 @@ playerApp.run(function($rootScope, $http, $location) {
           });
         }
       },
-      artist:function(artist){
+      artist:function(artistName,artist){
         console.log( artist );
+        console.log( artistName );
         var songs;
-        if( artist ){
-          songs = _.where( $rootScope.archive.files, { artist: artist });
+        if( artistName ){
+          songs = _.where( $rootScope.archive.files, { artist: artistName });
         }else{
           songs = $rootScope.archive.files;
         }
@@ -172,8 +175,8 @@ playerApp.run(function($rootScope, $http, $location) {
       //$rootScope.$apply();
       // get saved scan folder
       self.view = lockr.get('current_view');
+      if(_.isUndefined(self.view)) self.view = 'list';
       console.log( self.view );
-      if(_.isUndefined(self.view)) self.view = 'app';
       //$location.path(self.view);
       self.setView(self.view);
       // set final folder to scan
@@ -299,8 +302,11 @@ playerApp.run(function($rootScope, $http, $location) {
     },
     setView: function(view){
       // save view to storage
+      console.log(view);
       $location.path(view);
+      $rootScope.$apply();
       lockr.set('current_view', view);
+      $route.reload();
     },
     scan: function(sourcePath, cb){
       var self = this;
@@ -329,8 +335,8 @@ playerApp.run(function($rootScope, $http, $location) {
                 fileItem.id = fileId;
                 fileItem.name = path.basename(item.path);
                 fileItem.title = metadata.title || fileItem.name;
-                fileItem.artist = metadata.artist[0] || metadata.artist;
-                fileItem.album = metadata.album;
+                fileItem.artist = _.isArray(metadata.artist) ? !_.isEmpty(metadata.artist) ? metadata.artist[0] : _.isString(metadata.artist) ? metadata.artist : 'unknown' : 'unknown';
+                fileItem.album = !_.isEmpty(metadata.album) ? metadata.album : 'unknown';
                 fileItem.path = item.path;
                 fileItem.relPath = path.relative(pathstr, item.path);
                 fileItem.albumArt = albumArt;
@@ -412,9 +418,9 @@ playerApp.run(function($rootScope, $http, $location) {
     }
   };
   console.log( defaultFolder );
-  $rootScope.archive.init(defaultFolder);
+  $rootScope.archive.init( defaultFolder );
+  
   //
-
   $rootScope.notification = {
     text: '',
     timer: null,
@@ -517,7 +523,6 @@ playerApp.run(function($rootScope, $http, $location) {
               $rootScope.player.position.watch();
             },250);
           });
-
           self.audio.on('end', function(){
             console.log( self.stopped );
             if( !self.stopped ){
@@ -553,7 +558,9 @@ playerApp.run(function($rootScope, $http, $location) {
         this.visible = !this.visible;
       },
       clear: function(){
-        this.list = [];
+        var self = this;
+        self.list = [];
+        self.save();
       },
       set: function(what, value){
         // get saved scan folder
@@ -580,21 +587,22 @@ playerApp.run(function($rootScope, $http, $location) {
           this.list.push(angular.copy(data));
           $rootScope.notification.show('1 file added to playlist');
         }
+        self.save();
+      },
+      remove: function(file){
+        var self = this;
+        var id = this.list.indexOf(file);
+        var odds = this.list.splice(id, 1);
+        if( this.list.length === 0 ) this.list = [];
+        self.save();
+      },
+      save: function(){
         fs.outputJson($rootScope.archive.cacheDir+'/cachedPlaylist.json', self.list, function (err) {
           if( err ) console.log(err);
           console.log('saved');
           $rootScope.notification.show('Playlist cache saved.');
           $rootScope.$apply();
         });
-      },
-      remove: function(file){
-        var id = this.list.indexOf(file);
-        console.log(id);
-        var odds = this.list.splice(id, 1);
-        if( this.list.length === 0 ){
-          this.list = [];
-        }
-        console.log(odds);
       }
     },
     onend: function(){
@@ -846,10 +854,21 @@ playerApp.run(function($rootScope, $http, $location) {
   };
   $rootScope.player.init();
 
+  $rootScope.window = {
+    close: function(){
+      console.log('close');
+      remote.BrowserWindow.getFocusedWindow().close();
+    },
+    minimize: function(){
+      console.log('minimize');
+      remote.BrowserWindow.getFocusedWindow().minimize();
+    },
+  }
+
   window.addEventListener('resize', function(e){
     //e.preventDefault();
     winWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-  })
+  });
 
 });
 
@@ -857,15 +876,15 @@ playerApp.run(function($rootScope, $http, $location) {
 playerApp.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider
-    .when('/app', {
-      templateUrl: 'views/list.html',
+    .when('/list', {
+      templateUrl: './views/list.html',
       controller: 'ListCtrl'
     })
     .when('/library', {
-      templateUrl: 'views/library.html',
+      templateUrl: './views/library.html',
       controller: 'ListCtrl'
     })
     .otherwise({
-      redirectTo: '/app'
+      redirectTo: '/list'
     });
 }]);

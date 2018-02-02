@@ -14,7 +14,7 @@
 	<link rel="stylesheet" type="text/css" href="./css/app.min.css" />
 	</head>
 
-<body ng-app="playerApp" ng-controller="AppCtrl">
+<body ng-app="playerApp">
 
 	<div style="visibility: hidden;" ng-joy-ride="startJoyRide" config="config" on-finish="onFinish()" on-skip="onFinish()"></div>
 
@@ -43,8 +43,8 @@
 		<span class="logo-icon"><img src="./img/icon_64.png"></span>
 		<span class="title">PLÆR</span>
 		<i class='icon ion-refresh' ng-click="archive.scan();"></i>
-		<span id="close-window-button" class="close-button"><i class="icon ion-ios-close-empty"></i></span>
-		<span id="minimize-window-button" class="minimize-button"><i class="icon ion-ios-minus-empty"></i></span>
+		<span id="close-window-button" class="close-button" ng-click="window.close()"><i class="icon ion-ios-close-empty"></i></span>
+		<span id="minimize-window-button" class="minimize-button" ng-click="window.minimize()"><i class="icon ion-ios-minus-empty"></i></span>
 		<div class="search">
 			<label for="search">
 				<i class='icon ion-ios-search'></i>
@@ -57,7 +57,7 @@
 		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
 		<h3>View</h3>
 		<div class="views">
-			<i ng-click="archive.setView('app')" class="icon icon-th-list-1"></i>
+			<i ng-click="archive.setView('list')" class="icon icon-th-list-1"></i>
 			<i ng-click="archive.setView('library')" class="icon icon-th"></i>
 		</div>
 		<h3>Source</h3>
@@ -91,8 +91,7 @@
 		</div>
 	</div>
 
-	<div id="page-holder" ng-view="">
-	</div>
+	<div id="page-holder" ng-view></div>
 
 	<div id="controlls">
 		<div id="behind"></div>
