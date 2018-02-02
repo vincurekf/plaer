@@ -5,11 +5,13 @@ playerApp.run(function($rootScope, $http, $location) {
   var _ = require('underscore');
   var fs = require('fs-extra');
   var path = require('path');
+  var lockr = require('lockr');
   var getdirs = require('getdirs');
   var request = require('request');
-  var nwNotify = require('nw-notify');
+  //var nwNotify = require('nw-notify');
   var mm = require('musicmetadata');
   //
+  var winWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
   //
   var defaultFolder = '/home/amotio/git';
@@ -164,32 +166,19 @@ playerApp.run(function($rootScope, $http, $location) {
     init: function(folder){
       var self = this;
       // get saved scan folder
-      localforage.getItem('scan_folder', function(err, value) {
-        console.log( value );
-        if(value === null || err){
-          self.folder = self.defaultDir;
-          $rootScope.$apply();
-          return
-        }
-        self.folder = value;
-        $rootScope.$apply();
-      });
-      // get saved scan folder
-      localforage.getItem('current_view', function(err, value) {
-        console.log( value );
-        if(value === null || err){
-          self.view = 'list';
-          $location.path('list');
-          $rootScope.$apply();
-          return
-        }
-        self.view = value;
-        $location.path(value);
-        $rootScope.$apply();
-      });
+      self.folder = lockr.get('scan_folder');
+      if(_.isUndefined(self.folder)) self.folder = self.defaultDir;
       console.log( self.folder );
+      //$rootScope.$apply();
+      // get saved scan folder
+      self.view = lockr.get('current_view');
+      console.log( self.view );
+      if(_.isUndefined(self.view)) self.view = 'app';
+      //$location.path(self.view);
+      self.setView(self.view);
       // set final folder to scan
-      this.folder = folder ? path.resolve(this.folder) : path.resolve(this.defaultDir);
+      console.log( self.folder );
+      self.folder = folder ? path.resolve(self.folder) : path.resolve(self.defaultDir);
       // try to load saved list of scanned files
       try{
         var cachedFiles = fs.readJsonSync(self.cacheDir+'/cachedFiles.json', {throws: false});
@@ -311,9 +300,7 @@ playerApp.run(function($rootScope, $http, $location) {
     setView: function(view){
       // save view to storage
       $location.path(view);
-      localforage.setItem('current_view', view, function(err, value) {
-        if(err) console.log( err );
-      });
+      lockr.set('current_view', view);
     },
     scan: function(sourcePath, cb){
       var self = this;
@@ -373,12 +360,10 @@ playerApp.run(function($rootScope, $http, $location) {
             }
           }).on('end', function () {
             // save path to storage
-            localforage.setItem('scan_folder', foldPath, function(err, value) {
-              if(err) console.log( err );
-              console.log( value );
-              $rootScope.archive.folder = foldPath;
-              $rootScope.$apply();
-            });
+            var scan_folder = lockr.set('scan_folder', foldPath);
+            console.log( scan_folder );
+            $rootScope.archive.folder = foldPath;
+            $rootScope.$apply();
             // save sorted list
             console.dir( $rootScope.library.data );
             // remove duplicates
@@ -470,27 +455,19 @@ playerApp.run(function($rootScope, $http, $location) {
       });
       // try to load saved playlist
       try{
-        this.playlist.list = fs.readJsonSync(self.cacheDir+'/cachedPlaylist.json', {throws: false});
+        this.playlist.list = fs.readJsonSync($rootScope.archive.cacheDir+'/cachedPlaylist.json', {throws: false});
       }catch(err){
-        console.log( err );
+        //console.log( err );
         this.playlist.list = [];
       }
       // get saved scan folder
-      localforage.getItem('playlist_delay', function(err, value) {
-        console.log( value );
-        if(value === null || err){
-          self.playlist.delay = false;
-          $rootScope.$apply();
-          return
-        }
-        self.playlist.delay = parseInt(value);
-        $rootScope.$apply();
-      });
+      var playlist_delay = lockr.get('playlist_delay');
+      console.log( playlist_delay );
+      if(_.isUndefined(playlist_delay)) self.playlist.delay = false;
+      self.playlist.delay = parseInt(playlist_delay);
       self.bindKeys();
-      nwNotify.setConfig({
-        appIcon: path.resolve('./app/img/icon_64.png'),
-        displayTime: 5000
-      });
+      //nwNotify.setConfig({ appIcon: path.resolve('./app/img/icon_64.png'), displayTime: 5000 });
+
     },
     currArtist: function(artist){
       return this.current ? (this.current.artist === artist) : false;
@@ -523,17 +500,22 @@ playerApp.run(function($rootScope, $http, $location) {
           var fileBuff = fs.readFileSync(file.path);
           self.audio = AV.Player.fromBuffer(fileBuff);
           self.audio.on('ready', function(){
-            self.stopped = false;
-            self.playing = true;
-            console.log( 'ready' );
-            $rootScope.loading.active = false;
-            console.log( self.audio.duration );
-            $rootScope.player.duration = Math.floor(self.audio.duration);
-            console.log(self.duration);
-            // show notification
-            nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album);
-            $rootScope.$apply();
-            $rootScope.player.position.watch();
+            setTimeout(function(){
+              self.stopped = false;
+              self.playing = true;
+              console.log( 'ready' );
+              console.log( self.audio );
+              $rootScope.loading.active = false;
+              console.log( self.audio.duration );
+              self.duration = Math.floor(self.audio.duration);
+              console.log( self.duration );
+              // show notification
+              var myNotification = new Notification('Playing "'+file.title+'"', {
+                body: '<strong>'+file.title+'</strong><br>'+file.artist+' - '+file.album
+              });
+              $rootScope.$apply();
+              $rootScope.player.position.watch();
+            },250);
           });
 
           self.audio.on('end', function(){
@@ -552,7 +534,7 @@ playerApp.run(function($rootScope, $http, $location) {
           setTimeout(function(){
             if( !self.playing ){
               self.next(file);
-              nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>Couldn\'t be loaded. Playing next in list.');
+              //nwNotify.notify('PLAER', '<strong>'+file.title+'</strong><br>Couldn\'t be loaded. Playing next in list.');
               $rootScope.$apply();
             }
           },5000);
@@ -575,15 +557,10 @@ playerApp.run(function($rootScope, $http, $location) {
       },
       set: function(what, value){
         // get saved scan folder
-        localforage.getItem('playlist_'+what, function(err, value) {
-          console.log( value );
-          if(value === null || err){
-            console.log( err );
-            return
-          }
-          self.playlist.delay = parseInt(value);
-          $rootScope.$apply();
-        });
+        var playlist = lockr.get('playlist_'+what);
+        console.log( playlist );
+        if(playlist !== null) self.playlist.delay = parseInt(playlist);
+        $rootScope.$apply();
       },
       add: function(type, data){
         var self = this;
@@ -603,6 +580,12 @@ playerApp.run(function($rootScope, $http, $location) {
           this.list.push(angular.copy(data));
           $rootScope.notification.show('1 file added to playlist');
         }
+        fs.outputJson($rootScope.archive.cacheDir+'/cachedPlaylist.json', self.list, function (err) {
+          if( err ) console.log(err);
+          console.log('saved');
+          $rootScope.notification.show('Playlist cache saved.');
+          $rootScope.$apply();
+        });
       },
       remove: function(file){
         var id = this.list.indexOf(file);
@@ -737,7 +720,7 @@ playerApp.run(function($rootScope, $http, $location) {
         var self = $rootScope.player;
         self.position.timer = setInterval( function(){
           self.position.current = self.position.format( Math.floor(self.audio.currentTime) ) || '00:00';
-          self.position.percentage = (100/$rootScope.player.duration) * self.audio.currentTime;
+          self.position.percentage = (100/self.audio.duration) * self.audio.currentTime;
           $rootScope.$apply();
         }, 100);
       },
@@ -790,7 +773,7 @@ playerApp.run(function($rootScope, $http, $location) {
       },
       seek: function(pxpos){
         var perc = (100/winWidth) * pxpos;
-        var seekVal = Math.floor(($rootScope.player.duration/100)*perc);
+        var seekVal = Math.floor(($rootScope.player.audio.duration/100)*perc);
         console.log( seekVal );
         if( $rootScope.player.audio ) $rootScope.player.audio.seek( seekVal );
         $rootScope.player.audio
@@ -862,6 +845,12 @@ playerApp.run(function($rootScope, $http, $location) {
     }
   };
   $rootScope.player.init();
+
+  window.addEventListener('resize', function(e){
+    //e.preventDefault();
+    winWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+  })
+
 });
 
 // just some routes to show some content

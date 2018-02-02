@@ -4,6 +4,7 @@
  * splashscreen, saving/recovering last window state
  **/
 
+var gui = require('nw.gui');
 // define global variables
 var mainwin, maingui,
     tray = null,
@@ -15,7 +16,7 @@ var mainwin, maingui,
 var viewbox = {
   init: function( setTray ){
     window.onload = function() {
-      maingui = global.window.nwDispatcher.requireNwGui();
+      maingui = gui;//global.window.nwDispatcher.requireNwGui();
       console.log(maingui);
       mainwin = maingui.Window.get();
       // get the screen resolution

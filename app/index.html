@@ -57,7 +57,7 @@
 		<i class="icon icon-cog" ng-click="player.settings.toggle()"></i>
 		<h3>View</h3>
 		<div class="views">
-			<i ng-click="archive.setView('list')" class="icon icon-th-list-1"></i>
+			<i ng-click="archive.setView('app')" class="icon icon-th-list-1"></i>
 			<i ng-click="archive.setView('library')" class="icon icon-th"></i>
 		</div>
 		<h3>Source</h3>
@@ -111,14 +111,15 @@
 		</div>
 		<div class="volume">
       <label>
-				<span style="opacity: {{player.volume.value/100}}"></span>
+				<span style="opacity: {{ player.volume.value/100 }}"></span>
 				<input type="range" min="0" max="100" ng-model="player.volume.value" ng-change="player.volume.set(player.volume.value)" />
 			</label>
     </div>
   </div>
 
-	<!-- dependencies -->
-	<script src="./js/depends/localforage.min.js"></script>
+	<!-- dependencies 
+		<script src="./js/depends/localforage.min.js"></script>
+	-->
 	<script src="./js/depends/mousetrap.min.js"></script>
 	<script src="./js/depends/hammer.min.js"></script>
 	<!-- aurora audio library -->
@@ -129,8 +130,9 @@
 	<script src="./js/angular/angular.min.js"></script>
 	<script src="./js/angular/ng-order-object-by.js"></script>
 	<script src="./js/angular/angular-route.min.js"></script>
-	<!-- app scripts -->
-	<script src="./js/window.js"></script>
+	<!-- app scripts 
+		<script src="./js/window.js"></script>
+	-->
 	<script src="./js/controllers.js"></script>
 	<script src="./js/app.js"></script>
 

@@ -1,76 +1,30 @@
 {
-    "webexe_settings": {
-        "linux-x32": false, 
-        "export_dir": "/home/vincurekf/BUILDS", 
-        "windows-x64": false, 
-        "uncompressed_folder": false, 
-        "download_dir": "/home/vincurekf/Documents/Web2ExeLinux/files/downloads", 
-        "nw_compression_level": 9, 
-        "mac-x32": false, 
-        "custom_script": "", 
-        "windows-x32": false, 
-        "mac-x64": false, 
-        "nw_version": "0.12.3", 
-        "force_download": false, 
-        "linux-x64": true
-    }, 
-    "description": "Simple audio player", 
-    "nodejs": true, 
-    "additional_trust_anchors": [
-        ""
-    ], 
-    "inject-js-end": "", 
-    "node-remote": "", 
-    "node-main": "", 
-    "dependencies": {
-        "nw-notify": "", 
-        "getdirs": "", 
-        "request": "", 
-        "fs-extra": "^0.26.4", 
-        "underscore": "", 
-        "musicmetadata": ""
-    }, 
-    "webkit": {
-        "page-cache": false, 
-        "java": false, 
-        "plugin": false
-    }, 
-    "js-flags": "", 
-    "app_name": "plaer", 
-    "single-instance": false, 
-    "name": "PLAER", 
-    "user-agent": "", 
-    "window": {
-        "show": false, 
-        "always-on-top": false, 
-        "frame": false, 
-        "min-height": 400, 
-        "height": 540, 
-        "visible": true, 
-        "as_desktop": false, 
-        "min_width": 600, 
-        "fullscreen": false, 
-        "title": "PLAER", 
-        "min-width": 300, 
-        "mac_icon": "app/img/icon_64.png", 
-        "exe_icon": "app/img/icon_64.png", 
-        "width": 860, 
-        "resizable": true, 
-        "kiosk": false, 
-        "show_in_taskbar": true, 
-        "transparent": false, 
-        "toolbar": false, 
-        "icon": "./app/img/icon_64.png", 
-        "kiosk_emulation": false, 
-        "position": "center"
-    }, 
-    "version": "0.1.0", 
-    "snapshot": "", 
-    "keywords": [
-        "player", 
-        "audio"
-    ], 
-    "inject-js-start": "", 
-    "main": "./app/index.html", 
-    "chromium-args": ""
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "dependencies": {
+    "fs-extra": "^0.26.4",
+    "getdirs": "",
+    "lockr": "^0.8.4",
+    "musicmetadata": "",
+    "request": "",
+    "underscore": ""
+  },
+  "devDependencies": {
+    "electron": "^1.7.12"
+  }
 }
