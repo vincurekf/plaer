@@ -1,7 +1,7 @@
 # PLAER
-PLAER is a simple mp3 player that scans directory it is placed in (**/some/dir/plaer** will scan **/some/dir**) and lets you browse and play founded mp3 files.
-![Native-like Framework](screenshot.png)
-Nothing more and nothing less.
+PLAER is a simple mp3 player that scans directory it is placed in (**/some/dir/plaer** will scan **/some/dir**) and lets you browse and play found mp3/flac files.
+![PLAER](screenshot.png)
+
 Basic features that should have every audio player.
 
 - Play/pause/stop, next and previous
@@ -20,14 +20,14 @@ Basic features that should have every audio player.
   - ctrl+f: search
   - ctrl+r: random on/off
 
-Build on nw.js (on v0.12.3, linux 64bit tested and working) with Java Script, HTML + CSS.
+Build with [electron](https://github.com/electron/electron) Java Script, HTML and CSS.
 
 ## Installation
 If you want to try it out, go ahead and download release for your OS [here](https://github.com/vincurekf/plaer/releases).
 
 ## Usage
-- Click on the gear  icon, options panel pops up.
-- Under Source type the path you want to scan.
+- Click on the gear icon, options panel pops up.
+- Under **Source**, type the path you want to scan.
 - After scanning, you'll see all artist and albums as shown in screenshot.
 - And now just enjoy the music!
 
@@ -38,22 +38,23 @@ When you have nodejs (and npm) installed and working:
 
 - ```git clone git@github.com:vincurekf/plaer.git``` where you want the plaer to be (you can move it later though)
 - install node dependencies, run ```npm install``` in root directory
-- Download [nw.js](https://github.com/nwjs/nw.js#downloads) and unpack it to the root directory
-- On linux make nw executable (run as sudo) ``` sudo chmod +x ./nw```
-- Run nw (or nw.exe on windows)
+- in root directory run ```npm start```
 - Enjoy!
 
-[Web2Executable](https://github.com/jyapayne/Web2Executable) - Excellent tool for building executable files (only problem is that now compressed version of Plaer can't access audio files - the folder will be scanned, but audio wont load :/ )
+~~[Web2Executable](https://github.com/jyapayne/Web2Executable) - Excellent tool for building executable files (only problem is that now compressed version of Plaer can't access audio files - the folder will be scanned, but audio wont load :/ )~~
 
 ## Change log
 
-####v0.0.2
+#### v0.0.3
+- switched to electron
+
+#### v0.0.2
 - grid view
 - plays FLAC files
 - folder list when selecting scan path
 - change audio library to Aurora.js
 
-####v0.0.1
+#### v0.0.1
 - plays mp3
 - standard features (play/pause/stop, next/previous)
 - play list
